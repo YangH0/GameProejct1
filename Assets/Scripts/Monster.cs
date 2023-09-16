@@ -6,18 +6,43 @@ using UnityEngine.AI;
 public class Monster : MonoBehaviour
 {
     [SerializeField]
-    NavMeshAgent agent;
+    protected Player player;
+    [SerializeField]
+    protected NavMeshAgent agent;
 
     [SerializeField]
-    Transform target;
+    protected float speed;
+    public float hp;
+    public float damage;
+    public float maxAttackTime;
+    private float curAttackTime = 0;
 
-    void Awake()
+    protected virtual void Awake()
     {
-        
+        agent.speed = speed;
     }
 
-    void Update()
+    protected virtual void Update()
     {
-        agent.SetDestination(target.position);
+        agent.SetDestination(player.transform.position);
+        curAttackTime += Time.deltaTime;
     }
+
+    public void GetDamage(float dmg)
+    {
+        hp -= dmg;
+        Debug.Log(hp);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            if (curAttackTime < maxAttackTime)
+                return;
+            player.GetDamage(damage);
+            curAttackTime = 0;
+        }
+    }
+
 }
