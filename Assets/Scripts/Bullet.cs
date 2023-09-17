@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float damage = 5;
     public float speed;
 
     void Update()
@@ -17,11 +16,11 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag == "Monster")
         {
             Monster monster = other.GetComponent<Monster>();
-            monster.GetDamage(damage);
+            monster.GetDamage();
             
             Destroy(this.gameObject);
         }
-        else if (other.gameObject.tag == "Tile" || other.gameObject.tag == "Obstacle")
+        else if (other.gameObject.tag == "Tile")
         {
             Destroy(this.gameObject);
         }

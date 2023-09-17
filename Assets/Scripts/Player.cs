@@ -16,7 +16,10 @@ public class Player : MonoBehaviour
     private float xMoveInput;
     private float zMoveInput;
     private float moveSpeed = 5;
+    private float curAttackTime;
+    public float maxAttackTime;
     public float hp;
+    public float autoAttackDamage;
 
     private bool bDodge;
 
@@ -28,6 +31,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        curAttackTime += Time.deltaTime;
         SetAim();
         AutoAttack();
     }
@@ -40,9 +44,10 @@ public class Player : MonoBehaviour
 
     private void AutoAttack()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0) && curAttackTime > maxAttackTime)
         {
             Instantiate(bullet, buleltStart.transform.position, Quaternion.LookRotation(shootTarget));
+            curAttackTime = 0;
         }
     }
 

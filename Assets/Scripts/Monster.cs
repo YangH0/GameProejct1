@@ -28,9 +28,9 @@ public class Monster : MonoBehaviour
         curAttackTime += Time.deltaTime;
     }
 
-    public void GetDamage(float dmg)
+    public void GetDamage()
     {
-        hp -= dmg;
+        hp -= player.autoAttackDamage;
         Debug.Log(hp);
     }
 
