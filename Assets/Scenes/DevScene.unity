@@ -2618,7 +2618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &136779204
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4402,6 +4402,7 @@ MonoBehaviour:
   - {fileID: 1597336871}
   - {fileID: 335083708}
   traitSet: {fileID: 294411152}
+  crossLine: {fileID: 136779203}
 --- !u!4 &226528019
 Transform:
   m_ObjectHideFlags: 0

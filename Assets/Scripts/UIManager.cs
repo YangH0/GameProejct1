@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] explanation;
 
     [SerializeField] GameObject traitSet;
+    [SerializeField] GameObject crossLine;
 
     private List<TraitData> traitList = new List<TraitData>();
     private List<TraitData> traitSelectionList = new List<TraitData>();
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
         {
             UpdateTraitSelection();
             traitSet.SetActive(true);
+            crossLine.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
@@ -74,5 +76,6 @@ public class UIManager : MonoBehaviour
         traitUpdate.UpdateTraitValue();
         traitSelectionList[num].curLevel++;
         traitSet.SetActive(false);
+        crossLine.SetActive(true);
     }
 }

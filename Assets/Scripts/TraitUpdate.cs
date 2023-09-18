@@ -33,23 +33,32 @@ public class TraitUpdate : MonoBehaviour
 
     public void UpdateTraitValue()
     {
+        int iNum;
         switch (traitName)
         {
             case "AutoAttack1":
                 player.autoAttackDamage += damageValue;
-                player.maxAttackTime -= coolTimeValue;
+                iNum = (int)(player.maxAttackTime * 10);
+                iNum -= (int)(coolTimeValue * 10);
+                player.maxAttackTime = (float)iNum * 0.1f;
                 break;
             case "AutoAttack2":
                 player.autoAttackDamage += damageValue;
-                player.maxAttackTime -= coolTimeValue;
+                iNum = (int)(player.maxAttackTime * 10);
+                iNum -= (int)(coolTimeValue * 10);
+                player.maxAttackTime = (float)iNum * 0.1f;
                 break;
             case "AutoAttack3":
                 player.autoAttackDamage += damageValue;
-                player.maxAttackTime -= coolTimeValue;
+                iNum = (int)(player.maxAttackTime * 10);
+                iNum -= (int)(coolTimeValue * 10);
+                player.maxAttackTime = (float)iNum * 0.1f;
                 break;
             case "AutoAttack4":
                 player.autoAttackDamage += damageValue;
-                player.maxAttackTime -= coolTimeValue;
+                iNum = (int)(player.maxAttackTime * 10);
+                iNum -= (int)(coolTimeValue * 10);
+                player.maxAttackTime = (float)iNum * 0.1f;
                 break;
         }
     }
