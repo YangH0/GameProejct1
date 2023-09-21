@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] Camera cam;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject buleltStart;
+    [SerializeField] TraitAttack traitAttack;
 
     private Vector3 playerVelocity;
     private Vector3 playerRotation;
@@ -15,13 +16,15 @@ public class Player : MonoBehaviour
 
     private float xMoveInput;
     private float zMoveInput;
-    private float moveSpeed = 5;
+    private float walkSpeed = 5;
+    private float runSpeed = 10;
     private float curAttackTime;
     public float maxAttackTime;
     public float hp;
     public float autoAttackDamage;
 
     private bool bDodge;
+    private bool bIsRun;
 
     private void Awake()
     {
@@ -44,7 +47,7 @@ public class Player : MonoBehaviour
 
     private void AutoAttack()
     {
-        if (Input.GetMouseButton(0) && curAttackTime > maxAttackTime)
+        if (Input.GetMouseButton(0) && !bIsRun &&curAttackTime > maxAttackTime)
         {
             Instantiate(bullet, buleltStart.transform.position, Quaternion.LookRotation(shootTarget));
             curAttackTime = 0;
@@ -63,12 +66,28 @@ public class Player : MonoBehaviour
     {
         xMoveInput = Input.GetAxisRaw("Horizontal");
         zMoveInput = Input.GetAxisRaw("Vertical");
+        CheckRun();
 
         playerVelocity = new Vector3(xMoveInput, 0, zMoveInput);
         playerVelocity = cam.transform.TransformDirection(playerVelocity);
         playerVelocity.y = 0;
         playerVelocity = playerVelocity.normalized;
-        playerRigid.velocity = playerVelocity * moveSpeed;
+        if(!bIsRun)
+            playerRigid.velocity = playerVelocity * walkSpeed;
+        else
+            playerRigid.velocity = playerVelocity * runSpeed;
+    }
+
+    private void CheckRun()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            bIsRun = true;
+        }
+        else
+        {
+            bIsRun = false;
+        }
     }
 
     private void SetRotation()
@@ -85,6 +104,11 @@ public class Player : MonoBehaviour
             return;
         hp -= dmg;
         Debug.Log(hp);
+    }
+
+    public float AADamageCal()
+    {
+        return autoAttackDamage * traitAttack.ManaDamage;
     }
 
 }

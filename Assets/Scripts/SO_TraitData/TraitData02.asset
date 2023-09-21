@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c910521cfc2dee8439aac6ed4f381a88, type: 3}
   m_Name: TraitData02
   m_EditorClassIdentifier: 
-  traitName: AutoAttack2
+  traitName: ManaElemental
   Image: {fileID: 0}
   curLevel: 0
   maxLevel: 5
-  damageValue: 5
+  damageValue: 0.1
   numValue: 0
-  coolTimeValue: 0.1
+  coolTimeValue: 0
   rangeValue: 0

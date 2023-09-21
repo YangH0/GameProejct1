@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class TraitAttack : MonoBehaviour
 {
-    public float testMaxTime;
-    public float testCurTime;
-
+    public float ManaDamage;
 
     void Start()
     {
@@ -15,7 +13,6 @@ public class TraitAttack : MonoBehaviour
 
     void Update()
     {
-        testCurTime += Time.deltaTime;
 
     }
 }

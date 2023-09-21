@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
             
             Destroy(this.gameObject);
         }
-        else if (other.gameObject.tag == "Tile")
+        else if (other.gameObject.tag == "Tile" || other.gameObject.tag == "Obstacle")
         {
             Destroy(this.gameObject);
         }

@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
         {
             traitData[i].curLevel = 0;
         }
+
     }
 
     void Update()
@@ -43,6 +44,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateTraitSelection()
     {
+        Time.timeScale = 0;
         traitList.Clear();
         traitSelectionList.Clear();
         for(int i = 0; i < traitData.Length; i++)
@@ -72,6 +74,7 @@ public class UIManager : MonoBehaviour
 
     public void SelectTrait(int num)
     {
+        Time.timeScale = 1;
         traitUpdate.UpdateTraitData(traitSelectionList[num]);
         traitUpdate.UpdateTraitValue();
         traitSelectionList[num].curLevel++;

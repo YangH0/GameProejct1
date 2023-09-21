@@ -30,7 +30,8 @@ public class Monster : MonoBehaviour
 
     public void GetDamage()
     {
-        hp -= player.autoAttackDamage;
+        hp -= player.AADamageCal();
+        Debug.Log(player.AADamageCal());
         Debug.Log(hp);
     }
 

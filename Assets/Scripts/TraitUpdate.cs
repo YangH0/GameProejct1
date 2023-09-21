@@ -42,11 +42,8 @@ public class TraitUpdate : MonoBehaviour
                 iNum -= (int)(coolTimeValue * 10);
                 player.maxAttackTime = (float)iNum * 0.1f;
                 break;
-            case "AutoAttack2":
-                player.autoAttackDamage += damageValue;
-                iNum = (int)(player.maxAttackTime * 10);
-                iNum -= (int)(coolTimeValue * 10);
-                player.maxAttackTime = (float)iNum * 0.1f;
+            case "ManaElemental":
+                traitAttack.ManaDamage += damageValue;
                 break;
             case "AutoAttack3":
                 player.autoAttackDamage += damageValue;
@@ -72,9 +69,8 @@ public class TraitUpdate : MonoBehaviour
                 explanation += player.autoAttackDamage.ToString() + "->" + (player.autoAttackDamage + damageValue).ToString() +"\n";
                 explanation += player.maxAttackTime.ToString() + "->" + (player.maxAttackTime-coolTimeValue).ToString();
                 break;
-            case "AutoAttack2":
-                explanation += player.autoAttackDamage.ToString() + "->" + (player.autoAttackDamage + damageValue).ToString() + "\n";
-                explanation += player.maxAttackTime.ToString() + "->" + (player.maxAttackTime - coolTimeValue).ToString();
+            case "ManaElemental":
+                explanation += traitAttack.ManaDamage.ToString() + "->" + (traitAttack.ManaDamage + damageValue).ToString() + "\n";
                 break;
             case "AutoAttack3":
                 explanation += player.autoAttackDamage.ToString() + "->" + (player.autoAttackDamage + damageValue).ToString() + "\n";
