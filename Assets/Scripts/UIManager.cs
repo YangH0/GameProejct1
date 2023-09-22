@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
+using Cinemachine;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,9 +14,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image[] traitImage;
     [SerializeField] TextMeshProUGUI[] levelChange;
     [SerializeField] TextMeshProUGUI[] explanation;
+    [SerializeField] Slider mouseSlider;
+    [SerializeField] Slider FOVSlider;
+
+    [SerializeField] CinemachineFreeLook freelook;
 
     [SerializeField] GameObject traitSet;
     [SerializeField] GameObject crossLine;
+    [SerializeField] GameObject SettingMenu;
 
     private List<TraitData> traitList = new List<TraitData>();
     private List<TraitData> traitSelectionList = new List<TraitData>();
@@ -27,6 +34,7 @@ public class UIManager : MonoBehaviour
         {
             traitData[i].curLevel = 0;
         }
+        Time.timeScale = 1;
 
     }
 
@@ -39,6 +47,13 @@ public class UIManager : MonoBehaviour
             crossLine.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!SettingMenu.activeSelf)
+                SetSettingMenu(true);
+            else
+                SetSettingMenu(false);
         }
     }
 
@@ -75,10 +90,44 @@ public class UIManager : MonoBehaviour
     public void SelectTrait(int num)
     {
         Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         traitUpdate.UpdateTraitData(traitSelectionList[num]);
         traitUpdate.UpdateTraitValue();
         traitSelectionList[num].curLevel++;
         traitSet.SetActive(false);
         crossLine.SetActive(true);
+    }
+
+    public void SetMouseSensitivity()
+    {
+        freelook.m_XAxis.m_MaxSpeed = mouseSlider.value*150;
+        freelook.m_YAxis.m_MaxSpeed = mouseSlider.value*2;
+    }
+    public void SetFOV()
+    {
+        freelook.m_Lens.FieldOfView= FOVSlider.value+30;
+    }
+    public void LoadTitleScene()
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
+
+    public void SetSettingMenu(bool state)
+    {
+        SettingMenu.SetActive(state);
+        if (state)
+        {
+            Time.timeScale = 0;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }
