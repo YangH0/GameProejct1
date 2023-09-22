@@ -7,7 +7,7 @@ public class MonsterBullet : MonoBehaviour
     public float damage = 20;
     public float speed;
 
-    void Update()
+    void FixedUpdate()
     {
         transform.Translate(Vector3.forward * speed);
     }
