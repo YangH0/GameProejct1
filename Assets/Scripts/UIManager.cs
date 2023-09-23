@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] explanation;
     [SerializeField] Slider mouseSlider;
     [SerializeField] Slider FOVSlider;
+    [SerializeField] Slider hpSlider;
+    [SerializeField] Slider expSlider;
 
     [SerializeField] CinemachineFreeLook freelook;
 
@@ -40,14 +42,6 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            UpdateTraitSelection();
-            traitSet.SetActive(true);
-            crossLine.SetActive(false);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!SettingMenu.activeSelf)
@@ -100,6 +94,15 @@ public class UIManager : MonoBehaviour
         crossLine.SetActive(true);
     }
 
+    public void LevelUp()
+    {
+        UpdateTraitSelection();
+        traitSet.SetActive(true);
+        crossLine.SetActive(false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void SetMouseSensitivity()
     {
         freelook.m_XAxis.m_MaxSpeed = mouseSlider.value*150;
@@ -130,4 +133,22 @@ public class UIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
+    
+    public void SetMaxHpUI(float hp)
+    {
+        hpSlider.maxValue = hp;
+    }
+    public void SetHpUI(float hp)
+    {
+        hpSlider.value = hp;
+    }
+    public void SetMaxExpUI(float exp)
+    {
+        expSlider.maxValue = exp;
+    }
+    public void SetExpUI(float exp)
+    {
+        expSlider.value = exp;
+    }
+
 }

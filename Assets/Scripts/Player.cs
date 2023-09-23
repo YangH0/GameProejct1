@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject buleltStart;
     [SerializeField] TraitAttack traitAttack;
+    [SerializeField] UIManager uiManager;
 
     private Vector3 playerVelocity;
     private Vector3 playerRotation;
@@ -20,16 +21,24 @@ public class Player : MonoBehaviour
     private float runSpeed = 10;
     private float curAttackTime;
     public float maxAttackTime;
-    public float hp;
+    public float maxHp;
+    private float hp;
+    private float exp = 0;
+    public float maxExp;
     public float autoAttackDamage;
 
-    private bool bDodge;
+
     private bool bIsRun;
 
     private void Awake()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        hp = maxHp;
+        uiManager.SetMaxHpUI(maxHp);
+        uiManager.SetHpUI(hp);
+        uiManager.SetExpUI(exp);
+        uiManager.SetMaxExpUI(maxExp);
     }
 
     private void Update()
@@ -100,10 +109,24 @@ public class Player : MonoBehaviour
 
     public void GetDamage(float dmg)
     {
-        if (bDodge)
-            return;
         hp -= dmg;
+        uiManager.SetHpUI(hp);
         Debug.Log(hp);
+    }
+
+    public void GetExp(float m_exp)
+    {
+        exp += m_exp;
+
+        if (exp >= maxExp) //·¹º§¾÷
+        {
+            exp -= maxExp;
+            maxExp *= 1.5f;
+            uiManager.SetMaxExpUI(maxExp);
+            uiManager.LevelUp();
+        }
+        uiManager.SetExpUI(exp);
+
     }
 
     public float AADamageCal()

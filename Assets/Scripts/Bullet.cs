@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] Player player;
     public float speed;
 
     void FixedUpdate()
@@ -16,7 +17,7 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag == "Monster")
         {
             Monster monster = other.GetComponent<Monster>();
-            monster.GetDamage();
+            monster.GetBulletDamage();
             
             Destroy(this.gameObject);
         }

@@ -12,14 +12,17 @@ public class Monster : MonoBehaviour
 
     [SerializeField]
     protected float speed;
-    public float hp;
+    public float maxHp;
+    private float hp = 0;
     public float damage;
     public float maxAttackTime;
     private float curAttackTime = 0;
+    public float exp;
 
     protected virtual void Awake()
     {
         agent.speed = speed;
+        hp = maxHp;
     }
 
     protected virtual void Update()
@@ -28,11 +31,18 @@ public class Monster : MonoBehaviour
         curAttackTime += Time.deltaTime;
     }
 
-    public void GetDamage()
+    public void GetBulletDamage()
     {
         hp -= player.AADamageCal();
-        Debug.Log(player.AADamageCal());
         Debug.Log(hp);
+        if (hp <= 0)
+            Die();
+    }
+
+    protected void Die()
+    {
+        player.GetExp(exp);
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionStay(Collision collision)
