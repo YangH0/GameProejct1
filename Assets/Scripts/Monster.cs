@@ -8,6 +8,8 @@ public class Monster : MonoBehaviour
     [SerializeField]
     protected Player player;
     [SerializeField]
+    private TraitAttack traitAttack;
+    [SerializeField]
     protected NavMeshAgent agent;
 
     [SerializeField]
@@ -39,9 +41,18 @@ public class Monster : MonoBehaviour
             Die();
     }
 
+    public void GetTraitDamage(string traitName)
+    {
+        hp -= traitAttack.TraitDamage(traitName);
+        Debug.Log(hp);
+        if (hp <= 0)
+            Die();
+    }
+
     protected void Die()
     {
         player.GetExp(exp);
+        gameObject.transform.position = new Vector3(0, 100, 0);
         gameObject.SetActive(false);
     }
 

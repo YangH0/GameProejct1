@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
         {
             Monster monster = other.GetComponent<Monster>();
             monster.GetBulletDamage();
-            
+
             Destroy(this.gameObject);
         }
         else if (other.gameObject.tag == "Tile" || other.gameObject.tag == "Obstacle")

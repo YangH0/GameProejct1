@@ -45,17 +45,27 @@ public class TraitUpdate : MonoBehaviour
             case "ManaElemental":
                 traitAttack.ManaDamage += damageValue;
                 break;
-            case "AutoAttack3":
-                player.autoAttackDamage += damageValue;
-                iNum = (int)(player.maxAttackTime * 10);
-                iNum -= (int)(coolTimeValue * 10);
-                player.maxAttackTime = (float)iNum * 0.1f;
+            case "Test1":
+                if (curLevel == 0)
+                    traitAttack.StartCoroutine(traitAttack.CTestAttack1());
+                else
+                {
+                    traitAttack.testDamage += damageValue;
+                    iNum = (int)(traitAttack.testCoolTime * 10);
+                    iNum -= (int)(coolTimeValue * 10);
+                    traitAttack.testCoolTime = (float)iNum * 0.1f;
+                }
                 break;
-            case "AutoAttack4":
-                player.autoAttackDamage += damageValue;
-                iNum = (int)(player.maxAttackTime * 10);
-                iNum -= (int)(coolTimeValue * 10);
-                player.maxAttackTime = (float)iNum * 0.1f;
+            case "Test2":
+                if (curLevel == 0)
+                    traitAttack.StartCoroutine(traitAttack.CTestAttack2());
+                else
+                {
+                    traitAttack.test2Damage += damageValue;
+                    iNum = (int)(traitAttack.test2CoolTime * 10);
+                    iNum -= (int)(coolTimeValue * 10);
+                    traitAttack.test2CoolTime = (float)iNum * 0.1f;
+                }
                 break;
         }
     }

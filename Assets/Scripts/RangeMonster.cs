@@ -36,7 +36,7 @@ public class RangeMonster : Monster
         if(other.gameObject.tag == "Player")
         {
             bInRange = true;
-            agent.speed = 0;
+            agent.speed = 0.3f;
         }
     }
 
