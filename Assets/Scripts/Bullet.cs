@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] Player player;
     public float speed;
+    public float damage;
 
     void FixedUpdate()
     {
@@ -17,13 +18,13 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag == "Monster")
         {
             Monster monster = other.GetComponent<Monster>();
-            monster.GetBulletDamage();
+            monster.GetDamage(damage);
 
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
         else if (other.gameObject.tag == "Tile" || other.gameObject.tag == "Obstacle")
         {
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

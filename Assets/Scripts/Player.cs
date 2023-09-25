@@ -6,10 +6,13 @@ public class Player : MonoBehaviour
 {
     [SerializeField] Rigidbody playerRigid;
     [SerializeField] Camera cam;
-    [SerializeField] GameObject bullet;
-    [SerializeField] GameObject buleltStart;
+    [SerializeField] GameObject bulletStart;
     [SerializeField] TraitAttack traitAttack;
     [SerializeField] UIManager uiManager;
+    [SerializeField] GameObject bullet;
+
+    List<GameObject> bulletList = new List<GameObject>();
+
 
     private Vector3 playerVelocity;
     private Vector3 playerRotation;
@@ -58,7 +61,27 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && !bIsRun &&curAttackTime > maxAttackTime)
         {
-            Instantiate(bullet, buleltStart.transform.position, Quaternion.LookRotation(shootTarget));
+            GameObject newObj = null;
+            for (int i = 0; i < bulletList.Count; i++)
+            {
+                if (!bulletList[i].activeSelf)
+                {
+                    bulletList[i].SetActive(true);
+                    newObj = bulletList[i];
+                    break;
+                }
+            }
+            if(newObj == null)
+            {
+                newObj = Instantiate(bullet);
+                bulletList.Add(newObj);
+            }
+
+            newObj.transform.position = bulletStart.transform.position;
+            newObj.transform.rotation = Quaternion.LookRotation(shootTarget);
+
+            Bullet bul = newObj.GetComponent<Bullet>();
+            bul.damage = autoAttackDamage * traitAttack.ManaDamage;
             curAttackTime = 0;
         }
     }
@@ -128,10 +151,4 @@ public class Player : MonoBehaviour
         uiManager.SetExpUI(exp);
 
     }
-
-    public float AADamageCal()
-    {
-        return autoAttackDamage * traitAttack.ManaDamage;
-    }
-
 }

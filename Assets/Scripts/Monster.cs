@@ -33,17 +33,9 @@ public class Monster : MonoBehaviour
         curAttackTime += Time.deltaTime;
     }
 
-    public void GetBulletDamage()
+    public void GetDamage(float damage)
     {
-        hp -= player.AADamageCal();
-        Debug.Log(hp);
-        if (hp <= 0)
-            Die();
-    }
-
-    public void GetTraitDamage(string traitName)
-    {
-        hp -= traitAttack.TraitDamage(traitName);
+        hp -= damage;
         Debug.Log(hp);
         if (hp <= 0)
             Die();
