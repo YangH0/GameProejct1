@@ -278,8 +278,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  traitAttack: {fileID: 0}
   agent: {fileID: 4311096102032449862}
   speed: 3
-  hp: 100
+  maxHp: 20
   damage: 5
   maxAttackTime: 0.2
+  exp: 5

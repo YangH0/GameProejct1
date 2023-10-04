@@ -50,10 +50,13 @@ public class TraitUpdate : MonoBehaviour
                     traitAttack.StartCoroutine(traitAttack.CTestAttack1());
                 else
                 {
-                    traitAttack.testDamage += damageValue;
-                    iNum = (int)(traitAttack.testCoolTime * 10);
+                    traitAttack.traitInfo[0].damage += damageValue;
+                    Debug.Log(traitAttack.traitInfo[0].damage);
+                    iNum = (int)(traitAttack.traitInfo[0].coolTime * 10);
                     iNum -= (int)(coolTimeValue * 10);
-                    traitAttack.testCoolTime = (float)iNum * 0.1f;
+                    traitAttack.traitInfo[0].coolTime = (float)iNum * 0.1f;
+                    Debug.Log(traitAttack.traitInfo[0].coolTime);
+
                 }
                 break;
             case "Test2":
@@ -61,10 +64,10 @@ public class TraitUpdate : MonoBehaviour
                     traitAttack.StartCoroutine(traitAttack.CTestAttack2());
                 else
                 {
-                    traitAttack.test2Damage += damageValue;
-                    iNum = (int)(traitAttack.test2CoolTime * 10);
+                    traitAttack.traitInfo[1].damage += damageValue;
+                    iNum = (int)(traitAttack.traitInfo[1].coolTime * 10);
                     iNum -= (int)(coolTimeValue * 10);
-                    traitAttack.test2CoolTime = (float)iNum * 0.1f;
+                    traitAttack.traitInfo[1].coolTime = (float)iNum * 0.1f;
                 }
                 break;
         }
@@ -82,13 +85,13 @@ public class TraitUpdate : MonoBehaviour
             case "ManaElemental":
                 explanation += traitAttack.ManaDamage.ToString() + "->" + (traitAttack.ManaDamage + damageValue).ToString() + "\n";
                 break;
-            case "AutoAttack3":
-                explanation += player.autoAttackDamage.ToString() + "->" + (player.autoAttackDamage + damageValue).ToString() + "\n";
-                explanation += player.maxAttackTime.ToString() + "->" + (player.maxAttackTime - coolTimeValue).ToString();
+            case "Test1":
+                explanation += traitAttack.traitInfo[0].damage.ToString() + "->" + (traitAttack.traitInfo[0].damage + damageValue).ToString() + "\n";
+                explanation += traitAttack.traitInfo[0].coolTime.ToString() + "->" + (traitAttack.traitInfo[0].coolTime - coolTimeValue).ToString();
                 break;
-            case "AutoAttack4":
-                explanation += player.autoAttackDamage.ToString() + "->" + (player.autoAttackDamage + damageValue).ToString() + "\n";
-                explanation += player.maxAttackTime.ToString() + "->" + (player.maxAttackTime - coolTimeValue).ToString();
+            case "Test2":
+                explanation += traitAttack.traitInfo[1].damage.ToString() + "->" + (traitAttack.traitInfo[1].damage + damageValue).ToString() + "\n";
+                explanation += traitAttack.traitInfo[1].coolTime.ToString() + "->" + (traitAttack.traitInfo[1].coolTime - coolTimeValue).ToString();
                 break;
         }
 

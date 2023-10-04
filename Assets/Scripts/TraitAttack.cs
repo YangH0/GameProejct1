@@ -2,87 +2,103 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct TraitStruct
+{
+    public float damage;
+    public float coolTime;
+    public List<GameObject> traitList;
+}
+
 public class TraitAttack : MonoBehaviour
 {
     public float ManaDamage;
-    public float testDamage;
-    public float testCoolTime;
-    public float test2Damage;
-    public float test2CoolTime;
+    public int traitNum;
 
     private Vector3 nearVector;
     private GameObject nearObject;
 
     [SerializeField] private GameObject trait1;
     [SerializeField] private GameObject trait2;
-    [SerializeField] private TraitData[] traitData;
 
     public List<GameObject> monsters = new List<GameObject>();
-    List<GameObject> traitList1 = new List<GameObject>();
-    List<GameObject> traitList2 = new List<GameObject>();
 
+    public TraitStruct[] traitInfo;
+
+    private void Awake()
+    {
+        traitInfo = new TraitStruct[traitNum];
+        for(int i = 0; i < traitInfo.Length; i++)
+        {
+            traitInfo[i].traitList = new List<GameObject>();
+        }
+        for (int i = 0; i < traitInfo.Length; i++)
+        {
+            traitInfo[i].damage = 5;
+            traitInfo[i].coolTime = 1;
+        }
+    }
 
     public IEnumerator CTestAttack1()
     {
         FindNearlest();
 
-        if (nearObject != null)
+        if (monsters.Count != 0)
         {
             GameObject newObj = null;
-            for (int i = 0; i < traitList1.Count; i++)
+            for (int i = 0; i < traitInfo[0].traitList.Count; i++)
             {
-                if (!traitList1[i].activeSelf)
+                if (!traitInfo[0].traitList[i].activeSelf)
                 {
-                    traitList1[i].SetActive(true);
-                    newObj = traitList1[i];
+                    traitInfo[0].traitList[i].SetActive(true);
+                    newObj = traitInfo[0].traitList[i];
                     break;
                 }
             }
             if (newObj == null)
             {
                 newObj = Instantiate(trait1);
-                traitList1.Add(newObj);
+                traitInfo[0].traitList.Add(newObj);
             }
 
             newObj.transform.position = transform.position;
             newObj.transform.rotation = Quaternion.LookRotation(nearObject.transform.position - transform.position);
 
             Bullet bul = newObj.GetComponent<Bullet>();
-            bul.damage = testDamage;
+            bul.damage = traitInfo[0].damage;
         }
-            yield return new WaitForSeconds(testCoolTime);
+            yield return new WaitForSeconds(traitInfo[0].coolTime);
             StartCoroutine(CTestAttack1());
     }
 
     public IEnumerator CTestAttack2()
     {
         FindNearlest();
-
-        if (nearObject != null)
+        
+        if (monsters.Count != 0)
         {
             GameObject newObj = null;
-            for (int i = 0; i < traitList2.Count; i++)
+            for (int i = 0; i < traitInfo[1].traitList.Count; i++)
             {
-                if (!traitList2[i].activeSelf)
+                if (!traitInfo[1].traitList[i].activeSelf)
                 {
-                    traitList2[i].SetActive(true);
-                    newObj = traitList2[i];
+                    traitInfo[1].traitList[i].SetActive(true);
+                    newObj = traitInfo[1].traitList[i];
                     break;
                 }
             }
             if (newObj == null)
             {
                 newObj = Instantiate(trait2);
-                traitList2.Add(newObj);
+                traitInfo[1].traitList.Add(newObj);
             }
 
             newObj.transform.position = new Vector3(nearObject.transform.position.x,1, nearObject.transform.position.z);
             //newObj.transform.rotation = Quaternion.LookRotation(nearObject.transform.position - transform.position);
 
             RangeTrait bul = newObj.GetComponent<RangeTrait>();
-            bul.damage = test2Damage;
+            bul.damage = traitInfo[1].damage;
         }
-            yield return new WaitForSeconds(test2CoolTime);
+            yield return new WaitForSeconds(traitInfo[1].coolTime);
             StartCoroutine(CTestAttack2());
     }
 
@@ -90,6 +106,7 @@ public class TraitAttack : MonoBehaviour
     {
         nearVector = new Vector3(100, 100, 100);
         nearObject = null;
+        
         for (int i = 0; i < monsters.Count; i++)
         {
             if (Vector3.Distance(transform.position, monsters[i].transform.position) < Vector3.Distance(transform.position, nearVector))
@@ -100,16 +117,9 @@ public class TraitAttack : MonoBehaviour
         }
     }
 
-    public float TraitDamage(string traitname)
+    public void DeleteMonster(GameObject obj)
     {
-        switch (traitname)
-        {
-            case "Test1":
-                return testDamage;
-            case "Test2":
-                return test2Damage;
-        }
-        return 0;
+        monsters.Remove(obj);
     }
 
     private void OnTriggerEnter(Collider other)

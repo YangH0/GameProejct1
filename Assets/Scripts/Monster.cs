@@ -31,6 +31,7 @@ public class Monster : MonoBehaviour
     {
         agent.SetDestination(player.transform.position);
         curAttackTime += Time.deltaTime;
+        Debug.Log(traitAttack.ManaDamage);
     }
 
     public void GetDamage(float damage)
@@ -44,7 +45,8 @@ public class Monster : MonoBehaviour
     protected void Die()
     {
         player.GetExp(exp);
-        gameObject.transform.position = new Vector3(0, 100, 0);
+        //gameObject.transform.position = new Vector3(100, 100, 0);
+        traitAttack.DeleteMonster(this.gameObject);
         gameObject.SetActive(false);
     }
 
