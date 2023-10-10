@@ -31,13 +31,12 @@ public class Monster : MonoBehaviour
     {
         agent.SetDestination(player.transform.position);
         curAttackTime += Time.deltaTime;
-        Debug.Log(traitAttack.ManaDamage);
     }
 
     public void GetDamage(float damage)
     {
         hp -= damage;
-        Debug.Log(hp);
+        Debug.Log(gameObject.name + " Hit!!  " + "HP:" + hp);
         if (hp <= 0)
             Die();
     }

@@ -14,5 +14,6 @@ public class TraitData : ScriptableObject
     public float numValue;
     public float coolTimeValue;
     public float rangeValue;
+    public int pierce;
 
 }

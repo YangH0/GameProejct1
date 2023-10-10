@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] TraitAttack traitAttack;
     [SerializeField] UIManager uiManager;
     [SerializeField] GameObject bullet;
+    [SerializeField] GameObject fireBullet;
+    private GameObject attackObj;
 
     List<GameObject> bulletList = new List<GameObject>();
 
@@ -30,6 +32,8 @@ public class Player : MonoBehaviour
     public float maxExp;
     public float autoAttackDamage;
 
+    private int attackType=0;
+
 
     private bool bIsRun;
 
@@ -42,6 +46,7 @@ public class Player : MonoBehaviour
         uiManager.SetHpUI(hp);
         uiManager.SetExpUI(exp);
         uiManager.SetMaxExpUI(maxExp);
+        attackObj = bullet;
     }
 
     private void Update()
@@ -73,16 +78,45 @@ public class Player : MonoBehaviour
             }
             if(newObj == null)
             {
-                newObj = Instantiate(bullet);
+                newObj = Instantiate(attackObj);
                 bulletList.Add(newObj);
             }
 
-            newObj.transform.position = bulletStart.transform.position;
-            newObj.transform.rotation = Quaternion.LookRotation(shootTarget);
+            if(attackType == 0)
+            {
+                newObj.transform.position = bulletStart.transform.position;
+                newObj.transform.rotation = Quaternion.LookRotation(shootTarget);
 
-            Bullet bul = newObj.GetComponent<Bullet>();
-            bul.damage = autoAttackDamage * traitAttack.ManaDamage;
+                Bullet bul = newObj.GetComponent<Bullet>();
+                bul.damage = autoAttackDamage * traitAttack.ManaDamage;
+            }
+            else if(attackType == 1)
+            {
+                newObj.transform.position = bulletStart.transform.position;
+                newObj.transform.rotation = Quaternion.LookRotation(shootTarget);
+
+                ExplosiveBullet bul = newObj.GetComponent<ExplosiveBullet>();
+                bul.damage = autoAttackDamage;
+            }
+            
             curAttackTime = 0;
+        }
+    }
+
+    public void ChangeAutoAttack(int num)
+    {
+        for(int i = 0; i < bulletList.Count; i++)
+        {
+            bulletList[i].SetActive(false);
+        }
+        bulletList.Clear();
+        switch (num)
+        {
+            case 1:
+                attackObj = fireBullet;
+                attackType = 1;
+                autoAttackDamage = 10;
+                break;
         }
     }
 
@@ -135,6 +169,10 @@ public class Player : MonoBehaviour
         hp -= dmg;
         uiManager.SetHpUI(hp);
         Debug.Log(hp);
+        if(hp < 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void GetExp(float m_exp)

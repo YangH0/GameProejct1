@@ -16,6 +16,7 @@ public class TraitUpdate : MonoBehaviour
     private float numValue;
     private float coolTimeValue;
     private float rangeValue;
+    private int pierce;
 
 
     public string explanation;
@@ -28,6 +29,7 @@ public class TraitUpdate : MonoBehaviour
         numValue = traitData.numValue;
         coolTimeValue = traitData.coolTimeValue;
         rangeValue = traitData.rangeValue;
+        pierce = traitData.pierce;
     }
 
 
@@ -45,7 +47,7 @@ public class TraitUpdate : MonoBehaviour
             case "ManaElemental":
                 traitAttack.ManaDamage += damageValue;
                 break;
-            case "Test1":
+            case "Test1": // 투사체 관통X
                 if (curLevel == 0)
                     traitAttack.StartCoroutine(traitAttack.CTestAttack1());
                 else
@@ -59,7 +61,7 @@ public class TraitUpdate : MonoBehaviour
 
                 }
                 break;
-            case "Test2":
+            case "Test2": // 범위 공격
                 if (curLevel == 0)
                     traitAttack.StartCoroutine(traitAttack.CTestAttack2());
                 else
@@ -69,6 +71,21 @@ public class TraitUpdate : MonoBehaviour
                     iNum -= (int)(coolTimeValue * 10);
                     traitAttack.traitInfo[1].coolTime = (float)iNum * 0.1f;
                 }
+                break;
+            case "Test3": // 관통
+                if (curLevel == 0)
+                    traitAttack.StartCoroutine(traitAttack.CTestAttack3());
+                else
+                {
+                    traitAttack.traitInfo[2].damage += damageValue;
+                    iNum = (int)(traitAttack.traitInfo[2].coolTime * 10);
+                    iNum -= (int)(coolTimeValue * 10);
+                    traitAttack.traitInfo[2].coolTime = (float)iNum * 0.1f;
+                    traitAttack.traitInfo[2].pierce += pierce;
+                }
+                break;
+            case "FireMagic": // 관통
+                player.ChangeAutoAttack(1);
                 break;
         }
     }
@@ -92,6 +109,11 @@ public class TraitUpdate : MonoBehaviour
             case "Test2":
                 explanation += traitAttack.traitInfo[1].damage.ToString() + "->" + (traitAttack.traitInfo[1].damage + damageValue).ToString() + "\n";
                 explanation += traitAttack.traitInfo[1].coolTime.ToString() + "->" + (traitAttack.traitInfo[1].coolTime - coolTimeValue).ToString();
+                break;
+            case "Test3":
+                explanation += traitAttack.traitInfo[2].damage.ToString() + "->" + (traitAttack.traitInfo[2].damage + damageValue).ToString() + "\n";
+                explanation += traitAttack.traitInfo[2].coolTime.ToString() + "->" + (traitAttack.traitInfo[2].coolTime - coolTimeValue).ToString();
+                explanation += traitAttack.traitInfo[2].pierce.ToString() + "->" + (traitAttack.traitInfo[2].pierce +pierce).ToString();
                 break;
         }
 

@@ -6,6 +6,8 @@ public struct TraitStruct
 {
     public float damage;
     public float coolTime;
+    public float range;
+    public int pierce;
     public List<GameObject> traitList;
 }
 
@@ -19,6 +21,7 @@ public class TraitAttack : MonoBehaviour
 
     [SerializeField] private GameObject trait1;
     [SerializeField] private GameObject trait2;
+    [SerializeField] private GameObject trait3;
 
     public List<GameObject> monsters = new List<GameObject>();
 
@@ -34,11 +37,12 @@ public class TraitAttack : MonoBehaviour
         for (int i = 0; i < traitInfo.Length; i++)
         {
             traitInfo[i].damage = 5;
-            traitInfo[i].coolTime = 1;
+            traitInfo[i].coolTime = 2;
+            traitInfo[i].pierce = 2;
         }
     }
 
-    public IEnumerator CTestAttack1()
+    public IEnumerator CTestAttack1() // 투사체 관통X 공격 샘플 (위습)
     {
         FindNearlest();
 
@@ -70,7 +74,40 @@ public class TraitAttack : MonoBehaviour
             StartCoroutine(CTestAttack1());
     }
 
-    public IEnumerator CTestAttack2()
+    public IEnumerator CTestAttack3() // 투사체 관통X 공격 샘플 (위습)
+    {
+        FindNearlest();
+
+        if (monsters.Count != 0)
+        {
+            GameObject newObj = null;
+            for (int i = 0; i < traitInfo[2].traitList.Count; i++)
+            {
+                if (!traitInfo[2].traitList[i].activeSelf)
+                {
+                    traitInfo[2].traitList[i].SetActive(true);
+                    newObj = traitInfo[2].traitList[i];
+                    break;
+                }
+            }
+            if (newObj == null)
+            {
+                newObj = Instantiate(trait3);
+                traitInfo[2].traitList.Add(newObj);
+            }
+
+            newObj.transform.position = transform.position;
+            newObj.transform.rotation = Quaternion.LookRotation(nearObject.transform.position - transform.position);
+
+            PiercingBullet bul = newObj.GetComponent<PiercingBullet>();
+            bul.damage = traitInfo[2].damage;
+            bul.pierce = traitInfo[2].pierce;
+        }
+            yield return new WaitForSeconds(traitInfo[2].coolTime);
+            StartCoroutine(CTestAttack3());
+    }
+
+    public IEnumerator CTestAttack2() // 범위 공격 샘플 (불기둥)
     {
         FindNearlest();
         
