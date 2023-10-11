@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField] UIManager uiManager;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject fireBullet;
+    [SerializeField] GameObject IceBullet;
+    [SerializeField] GameObject WindBullet;
+    [SerializeField] GameObject ElecBullet;
     private GameObject attackObj;
 
     List<GameObject> bulletList = new List<GameObject>();
@@ -98,6 +101,31 @@ public class Player : MonoBehaviour
                 ExplosiveBullet bul = newObj.GetComponent<ExplosiveBullet>();
                 bul.damage = autoAttackDamage;
             }
+            else if(attackType == 2)
+            {
+                newObj.transform.position = bulletStart.transform.position;
+                newObj.transform.rotation = Quaternion.LookRotation(shootTarget);
+
+                Explosive bul = newObj.GetComponent<Explosive>();
+                bul.damage = autoAttackDamage;
+                StartCoroutine(IceSword(newObj));
+            }
+            else if(attackType == 3)
+            {
+                newObj.transform.position = bulletStart.transform.position;
+                newObj.transform.rotation = Quaternion.LookRotation(shootTarget);
+
+                PiercingBullet bul = newObj.GetComponent<PiercingBullet>();
+                bul.damage = autoAttackDamage;
+            }
+            else if(attackType == 4)
+            {
+                newObj.transform.position = bulletStart.transform.position;
+                newObj.transform.rotation = Quaternion.LookRotation(shootTarget);
+
+                Bullet bul = newObj.GetComponent<Bullet>();
+                bul.damage = autoAttackDamage * traitAttack.ManaDamage;
+            }
             
             curAttackTime = 0;
         }
@@ -117,6 +145,22 @@ public class Player : MonoBehaviour
                 attackType = 1;
                 autoAttackDamage = 10;
                 break;
+            case 2:
+                attackObj = IceBullet;
+                attackType = 2;
+                autoAttackDamage = 10;
+                break;
+            case 3:
+                attackObj = WindBullet;
+                attackType = 3;
+                autoAttackDamage = 10;
+                break;
+            case 4:
+                attackObj = ElecBullet;
+                attackType = 4;
+                autoAttackDamage = 10;
+                break;
+
         }
     }
 
@@ -188,5 +232,11 @@ public class Player : MonoBehaviour
         }
         uiManager.SetExpUI(exp);
 
+    }
+
+    private IEnumerator IceSword(GameObject obj)
+    {
+        yield return new WaitForSeconds(0.8f);
+        obj.SetActive(false);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class RangeTrait : MonoBehaviour
 {
     public float damage;
+    public int debuffType;
 
     private void OnEnable()
     {
@@ -16,7 +17,7 @@ public class RangeTrait : MonoBehaviour
         if (other.gameObject.tag == "Monster")
         {
             Monster monster = other.GetComponent<Monster>();
-            monster.GetDamage(damage);
+            monster.GetDamage(damage, debuffType);
         }
     }
 

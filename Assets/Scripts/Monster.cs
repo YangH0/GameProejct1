@@ -17,9 +17,12 @@ public class Monster : MonoBehaviour
     public float maxHp;
     private float hp = 0;
     public float damage;
+    private float getDamageMulti = 1;
     public float maxAttackTime;
     private float curAttackTime = 0;
     public float exp;
+
+    //디버프 수치
 
     protected virtual void Awake()
     {
@@ -33,10 +36,11 @@ public class Monster : MonoBehaviour
         curAttackTime += Time.deltaTime;
     }
 
-    public void GetDamage(float damage)
+    public void GetDamage(float damage, int debuffType = 2)
     {
-        hp -= damage;
+        hp -= damage * getDamageMulti;
         Debug.Log(gameObject.name + " Hit!!  " + "HP:" + hp);
+        Debuff(debuffType);
         if (hp <= 0)
             Die();
     }
@@ -58,6 +62,71 @@ public class Monster : MonoBehaviour
             player.GetDamage(damage);
             curAttackTime = 0;
         }
+    }
+
+    private void Debuff(int debuffType)
+    {
+        switch (debuffType) // 1 - Ice   2 - Fire   3 - Wind  4 - Elec
+        {
+            case 1:
+                StopCoroutine(IceDebuff());
+                StartCoroutine(IceDebuff());
+                break;
+            case 2:
+                StopCoroutine(FireDebuff());
+                StopCoroutine(FireDamage());
+                StartCoroutine(FireDebuff());
+                break;
+            case 3:
+                StopCoroutine(WindDebuff());
+                StartCoroutine(WindDebuff());
+                break;
+            case 4:
+                StopCoroutine(ElecDebuff());
+                StartCoroutine(ElecDebuff());
+                break;
+
+        }
+
+    }
+
+    private IEnumerator IceDebuff()
+    {
+        agent.speed = speed;
+        agent.speed *= 0.3f;
+        //Debug.Log("얼음 디버프--슬로우");
+        yield return new WaitForSeconds(3f);
+        agent.speed = speed;
+    }
+    private IEnumerator FireDebuff()
+    {
+        StartCoroutine(FireDamage());
+        yield return new WaitForSeconds(2f);
+        StopCoroutine(FireDamage());
+    }
+    private IEnumerator FireDamage()
+    {
+        hp -= 2;
+        if (hp <= 0)
+            Die();
+        //Debug.Log("화상 데미지!!"+hp);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(FireDamage());
+    }
+    private IEnumerator WindDebuff()
+    {
+        //Debug.Log("바람 디버프 -- 추가데미지");
+        getDamageMulti = 1.3f;
+        yield return new WaitForSeconds(2f);
+        getDamageMulti = 1;
+    }
+    private IEnumerator ElecDebuff()
+    {
+        //Debug.Log("전기 디버프 -- 경직");
+        agent.speed = speed;
+        agent.speed *= 0;
+        yield return new WaitForSeconds(0.5f);
+        agent.speed = speed;
     }
 
 }

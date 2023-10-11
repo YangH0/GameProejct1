@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Explosive : MonoBehaviour
 {
-    public float damage;
+    public int debuffType;
+    public float damage = 5;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Monster")
         {
             Monster monster = other.GetComponent<Monster>();
-            monster.GetDamage(damage);
+            monster.GetDamage(damage, debuffType);
         }
     }
 }

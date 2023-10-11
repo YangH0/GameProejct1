@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public float speed;
     public float damage;
+    public int debuffType =0;
 
     void FixedUpdate()
     {
@@ -17,7 +18,7 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag == "Monster")
         {
             Monster monster = other.GetComponent<Monster>();
-            monster.GetDamage(damage);
+            monster.GetDamage(damage, debuffType);
 
             gameObject.SetActive(false);
         }

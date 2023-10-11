@@ -84,9 +84,19 @@ public class TraitUpdate : MonoBehaviour
                     traitAttack.traitInfo[2].pierce += pierce;
                 }
                 break;
-            case "FireMagic": // 관통
+            case "FireMagic": // 불 기본공격
                 player.ChangeAutoAttack(1);
                 break;
+            case "IceMagic": // 얼음 기본공격
+                player.ChangeAutoAttack(2);
+                break;
+            case "WindMagic": // 바람 기본공격
+                player.ChangeAutoAttack(3);
+                break;
+            case "ElecMagic": // 바람 기본공격
+                player.ChangeAutoAttack(4);
+                break;
+
         }
     }
 

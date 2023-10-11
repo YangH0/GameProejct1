@@ -37,7 +37,6 @@ public class UIManager : MonoBehaviour
             traitData[i].curLevel = 0;
         }
         Time.timeScale = 1;
-
     }
 
     void Update()
