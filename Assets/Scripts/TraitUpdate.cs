@@ -17,6 +17,8 @@ public class TraitUpdate : MonoBehaviour
     private float coolTimeValue;
     private float rangeValue;
     private int pierce;
+    int iNum;
+
 
 
     public string explanation;
@@ -35,7 +37,6 @@ public class TraitUpdate : MonoBehaviour
 
     public void UpdateTraitValue()
     {
-        int iNum;
         switch (traitName)
         {
             case "AutoAttack1":
@@ -44,46 +45,67 @@ public class TraitUpdate : MonoBehaviour
                 iNum -= (int)(coolTimeValue * 10);
                 player.maxAttackTime = (float)iNum * 0.1f;
                 break;
-            case "ManaElemental":
-                traitAttack.ManaDamage += damageValue;
-                break;
-            case "Test1": // 투사체 관통X
+            case "IceBomb":
                 if (curLevel == 0)
-                    traitAttack.StartCoroutine(traitAttack.CTestAttack1());
+                    traitAttack.StartCoroutine(traitAttack.IceBomb());
                 else
                 {
-                    traitAttack.traitInfo[0].damage += damageValue;
-                    Debug.Log(traitAttack.traitInfo[0].damage);
-                    iNum = (int)(traitAttack.traitInfo[0].coolTime * 10);
-                    iNum -= (int)(coolTimeValue * 10);
-                    traitAttack.traitInfo[0].coolTime = (float)iNum * 0.1f;
-                    Debug.Log(traitAttack.traitInfo[0].coolTime);
+                    UpdateValue(0);
+                }
+                break;
+            case "IceSpear":
+                if (curLevel == 0)
+                    traitAttack.StartCoroutine(traitAttack.IceSpear());
+                else
+                {
+                    UpdateValue(1);
+                }
+                break;
+            case "FireWall":
+                if (curLevel == 0)
+                    traitAttack.StartCoroutine(traitAttack.FireWall());
+                else
+                {
+                    UpdateValue(3);
+                }
+                break;
+            case "Meteor":
+                if (curLevel == 0)
+                    traitAttack.StartCoroutine(traitAttack.Meteor());
+                else
+                {
+                    UpdateValue(4);
+                }
+                break;
+            case "Wisp":
+                if (curLevel == 0)
+                    traitAttack.StartCoroutine(traitAttack.Wisp());
+                else
+                {
+                    UpdateValue(6);
 
                 }
                 break;
-            case "Test2": // 범위 공격
+            case "Tornado":
                 if (curLevel == 0)
-                    traitAttack.StartCoroutine(traitAttack.CTestAttack2());
+                    traitAttack.StartCoroutine(traitAttack.Tornado());
                 else
                 {
-                    traitAttack.traitInfo[1].damage += damageValue;
-                    iNum = (int)(traitAttack.traitInfo[1].coolTime * 10);
-                    iNum -= (int)(coolTimeValue * 10);
-                    traitAttack.traitInfo[1].coolTime = (float)iNum * 0.1f;
+                    UpdateValue(8);
+
                 }
                 break;
-            case "Test3": // 관통
+            case "Thunder":
                 if (curLevel == 0)
-                    traitAttack.StartCoroutine(traitAttack.CTestAttack3());
+                    traitAttack.StartCoroutine(traitAttack.Thunder());
                 else
                 {
-                    traitAttack.traitInfo[2].damage += damageValue;
-                    iNum = (int)(traitAttack.traitInfo[2].coolTime * 10);
-                    iNum -= (int)(coolTimeValue * 10);
-                    traitAttack.traitInfo[2].coolTime = (float)iNum * 0.1f;
-                    traitAttack.traitInfo[2].pierce += pierce;
+                    UpdateValue(10);
+
                 }
                 break;
+            
+            
             case "FireMagic": // 불 기본공격
                 player.ChangeAutoAttack(1);
                 break;
@@ -127,6 +149,15 @@ public class TraitUpdate : MonoBehaviour
                 break;
         }
 
+    }
+
+    private void UpdateValue(int i)
+    {
+        traitAttack.traitInfo[i].damage += damageValue;
+        iNum = (int)(traitAttack.traitInfo[i].coolTime * 10);
+        iNum -= (int)(coolTimeValue * 10);
+        traitAttack.traitInfo[i].coolTime = (float)iNum * 0.1f;
+        traitAttack.traitInfo[i].pierce += pierce;
     }
 
 

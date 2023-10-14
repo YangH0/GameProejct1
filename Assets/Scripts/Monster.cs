@@ -94,7 +94,7 @@ public class Monster : MonoBehaviour
     {
         agent.speed = speed;
         agent.speed *= 0.3f;
-        //Debug.Log("얼음 디버프--슬로우");
+        Debug.Log("얼음 디버프--슬로우");
         yield return new WaitForSeconds(3f);
         agent.speed = speed;
     }
@@ -109,20 +109,20 @@ public class Monster : MonoBehaviour
         hp -= 2;
         if (hp <= 0)
             Die();
-        //Debug.Log("화상 데미지!!"+hp);
+        Debug.Log("화상 데미지!!"+hp);
         yield return new WaitForSeconds(1f);
         StartCoroutine(FireDamage());
     }
     private IEnumerator WindDebuff()
     {
-        //Debug.Log("바람 디버프 -- 추가데미지");
+        Debug.Log("바람 디버프 -- 추가데미지");
         getDamageMulti = 1.3f;
         yield return new WaitForSeconds(2f);
         getDamageMulti = 1;
     }
     private IEnumerator ElecDebuff()
     {
-        //Debug.Log("전기 디버프 -- 경직");
+        Debug.Log("전기 디버프 -- 경직");
         agent.speed = speed;
         agent.speed *= 0;
         yield return new WaitForSeconds(0.5f);
