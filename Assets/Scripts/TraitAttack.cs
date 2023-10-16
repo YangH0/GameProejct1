@@ -21,14 +21,18 @@ public class TraitAttack : MonoBehaviour
                                         //얼음 오브젝트
     [SerializeField] private GameObject o_IceBomb;
     [SerializeField] private GameObject o_IceSpear;
+    [SerializeField] private GameObject o_IceField;
                                         //불 오브젝트
     [SerializeField] private GameObject o_FireWall;
     [SerializeField] private GameObject o_Meteor;
+    [SerializeField] private GameObject o_FireField;
                                         //바람 오브젝트
     [SerializeField] private GameObject o_Wisp;
     [SerializeField] private GameObject o_Tornado;
                                         //전기 오브젝트
+    [SerializeField] private GameObject o_ElectricField;
     [SerializeField] private GameObject o_Thunder;
+    [SerializeField] private GameObject o_ThunderSpear;
     
 
     public List<GameObject> monsters = new List<GameObject>();
@@ -45,7 +49,7 @@ public class TraitAttack : MonoBehaviour
         for (int i = 0; i < traitInfo.Length; i++)
         {
             traitInfo[i].damage = 5;
-            traitInfo[i].coolTime = 2;
+            traitInfo[i].coolTime = 3;
             traitInfo[i].pierce = 2;
         }
     }
@@ -115,7 +119,38 @@ public class TraitAttack : MonoBehaviour
         yield return new WaitForSeconds(traitInfo[1].coolTime);
         StartCoroutine(IceSpear());
     }
-    
+    public IEnumerator IceField() // 냉기 이동
+    {
+        FindNearlest();
+
+        if (monsters.Count != 0)
+        {
+            GameObject newObj = null;
+            for (int i = 0; i < traitInfo[2].traitList.Count; i++)
+            {
+                if (!traitInfo[2].traitList[i].activeSelf)
+                {
+                    traitInfo[2].traitList[i].SetActive(true);
+                    newObj = traitInfo[2].traitList[i];
+                    break;
+                }
+            }
+            if (newObj == null)
+            {
+                newObj = Instantiate(o_IceField);
+                traitInfo[2].traitList.Add(newObj);
+            }
+
+            newObj.transform.position = new Vector3(transform.position.x, 1.6f,transform.position.z);
+            //newObj.transform.rotation = Quaternion.LookRotation(nearObject.transform.position - transform.position);
+
+            RangeTrait bul = newObj.GetComponent<RangeTrait>();
+            bul.damage = traitInfo[2].damage;
+        }
+        yield return new WaitForSeconds(traitInfo[2].coolTime);
+        StartCoroutine(IceField());
+    }
+
     ////////////////
     // 화염 스킬 //
     public IEnumerator FireWall() //불기둥
@@ -180,6 +215,15 @@ public class TraitAttack : MonoBehaviour
         yield return new WaitForSeconds(traitInfo[4].coolTime);
         StartCoroutine(Meteor());
     }
+    public IEnumerator FireField() // 열기
+    {
+        o_FireField.SetActive(true);
+        TraitField field = o_FireField.GetComponent<TraitField>();
+
+        field.damage = traitInfo[5].damage;
+
+        yield break;
+    }
     ////////////////
     // 바람 스킬 //
     public IEnumerator Wisp() // 위습
@@ -237,6 +281,7 @@ public class TraitAttack : MonoBehaviour
 
             newObj.transform.position = transform.position;
             newObj.transform.rotation = Quaternion.LookRotation(nearObject.transform.position - transform.position);
+            newObj.transform.rotation = Quaternion.Euler(new Vector3(0, newObj.transform.rotation.eulerAngles.y, 0));
 
             PiercingBullet bul = newObj.GetComponent<PiercingBullet>();
             bul.damage = traitInfo[8].damage;
@@ -247,6 +292,16 @@ public class TraitAttack : MonoBehaviour
     }
     ////////////////
     // 전기 스킬 //
+    public IEnumerator ElectricField()
+    {
+        o_ElectricField.SetActive(true);
+        TraitField field = o_ElectricField.GetComponent<TraitField>();
+
+        field.damage = traitInfo[9].damage;
+
+        yield break;
+    }
+
     public IEnumerator Thunder() //벼락
     {
         FindNearlest();
@@ -269,7 +324,7 @@ public class TraitAttack : MonoBehaviour
                 traitInfo[10].traitList.Add(newObj);
             }
 
-            newObj.transform.position = new Vector3(nearObject.transform.position.x, 5, nearObject.transform.position.z);
+            newObj.transform.position = new Vector3(nearObject.transform.position.x, 1, nearObject.transform.position.z);
             //newObj.transform.rotation = Quaternion.LookRotation(nearObject.transform.position - transform.position);
 
             RangeTrait bul = newObj.GetComponent<RangeTrait>();
@@ -278,7 +333,37 @@ public class TraitAttack : MonoBehaviour
         yield return new WaitForSeconds(traitInfo[10].coolTime);
         StartCoroutine(Thunder());
     }
+    public IEnumerator ThunderSpear() // 전기창
+    {
+        FindNearlest();
 
+        if (monsters.Count != 0)
+        {
+            GameObject newObj = null;
+            for (int i = 0; i < traitInfo[11].traitList.Count; i++)
+            {
+                if (!traitInfo[11].traitList[i].activeSelf)
+                {
+                    traitInfo[11].traitList[i].SetActive(true);
+                    newObj = traitInfo[11].traitList[i];
+                    break;
+                }
+            }
+            if (newObj == null)
+            {
+                newObj = Instantiate(o_ThunderSpear);
+                traitInfo[11].traitList.Add(newObj);
+            }
+
+            newObj.transform.position = transform.position;
+            newObj.transform.rotation = Quaternion.LookRotation(nearObject.transform.position - transform.position);
+
+            ExplosiveBullet bul = newObj.GetComponent<ExplosiveBullet>();
+            bul.damage = traitInfo[11].damage;
+        }
+        yield return new WaitForSeconds(traitInfo[11].coolTime);
+        StartCoroutine(ThunderSpear());
+    }
 
     private void FindNearlest()
     {

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 507765900190753185}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.43, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4753,7 +4753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0effb9b6360df3b4387ef680e1d96bd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
+  speed: 0.2
   damage: 0
   pierce: 0
   debuffType: 3
@@ -4772,11 +4772,11 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.5
   m_Height: 5
   m_Direction: 1
-  m_Center: {x: 0, y: 3.64, z: 0}
+  m_Center: {x: 0, y: 1.35, z: 0}

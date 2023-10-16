@@ -167,12 +167,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7835759723351918828}
+  - component: {fileID: 2233418227300193883}
   - component: {fileID: 7730015872710014578}
   - component: {fileID: 292251342816711241}
   - component: {fileID: 2189540335265057677}
   - component: {fileID: 7416714674185607933}
   - component: {fileID: 7769529213105411635}
-  - component: {fileID: 2233418227300193883}
   m_Layer: 0
   m_Name: RangeMonsterTest
   m_TagString: Monster
@@ -197,6 +197,28 @@ Transform:
   - {fileID: 5543264414115666932}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2233418227300193883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7866726709236299188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb0470761c525f34b881bb4e3476dd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  traitAttack: {fileID: 0}
+  agent: {fileID: 7769529213105411635}
+  speed: 2
+  maxHp: 0
+  damage: 3
+  maxAttackTime: 0.2
+  exp: 0
+  bullet: {fileID: 1576400206143827250, guid: ea0de580b6bfa054b96521a1350bb207, type: 3}
+  maxRangeAttackTime: 2
 --- !u!33 &7730015872710014578
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -319,23 +341,3 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2233418227300193883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7866726709236299188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb0470761c525f34b881bb4e3476dd5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  agent: {fileID: 7769529213105411635}
-  speed: 2
-  hp: 50
-  damage: 3
-  maxAttackTime: 0.2
-  bullet: {fileID: 1576400206143827250, guid: ea0de580b6bfa054b96521a1350bb207, type: 3}
-  maxRangeAttackTime: 2

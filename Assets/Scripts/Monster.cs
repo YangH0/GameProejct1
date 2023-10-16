@@ -12,6 +12,9 @@ public class Monster : MonoBehaviour
     [SerializeField]
     protected NavMeshAgent agent;
 
+    private Animator anim;
+    private BoxCollider col;
+
     [SerializeField]
     protected float speed;
     public float maxHp;
@@ -19,7 +22,7 @@ public class Monster : MonoBehaviour
     public float damage;
     private float getDamageMulti = 1;
     public float maxAttackTime;
-    private float curAttackTime = 0;
+    protected float curAttackTime = 0;
     public float exp;
 
     //디버프 수치
@@ -28,6 +31,8 @@ public class Monster : MonoBehaviour
     {
         agent.speed = speed;
         hp = maxHp;
+        anim = GetComponent<Animator>();
+        col = GetComponent<BoxCollider>();
     }
 
     protected virtual void Update()
@@ -39,7 +44,7 @@ public class Monster : MonoBehaviour
     public void GetDamage(float damage, int debuffType = 2)
     {
         hp -= damage * getDamageMulti;
-        Debug.Log(gameObject.name + " Hit!!  " + "HP:" + hp);
+        //Debug.Log(gameObject.name + " Hit!!  " + "HP:" + hp);
         Debuff(debuffType);
         if (hp <= 0)
             Die();
@@ -48,9 +53,7 @@ public class Monster : MonoBehaviour
     protected void Die()
     {
         player.GetExp(exp);
-        //gameObject.transform.position = new Vector3(100, 100, 0);
-        traitAttack.DeleteMonster(this.gameObject);
-        gameObject.SetActive(false);
+        StartCoroutine(DieSetting());
     }
 
     private void OnCollisionStay(Collision collision)
@@ -90,11 +93,29 @@ public class Monster : MonoBehaviour
 
     }
 
+    protected virtual void SpawnSetting()
+    {
+        anim.SetBool("bIsDie", false);
+        col.enabled = true;
+        agent.speed = speed;
+        gameObject.SetActive(true);
+    }
+
+    protected virtual IEnumerator DieSetting()
+    {
+        traitAttack.DeleteMonster(this.gameObject);
+        anim.SetBool("bIsDie", true);
+        agent.speed = 0;
+        col.enabled = false;
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
+    }
+
     private IEnumerator IceDebuff()
     {
         agent.speed = speed;
         agent.speed *= 0.3f;
-        Debug.Log("얼음 디버프--슬로우");
+        //Debug.Log("얼음 디버프--슬로우");
         yield return new WaitForSeconds(3f);
         agent.speed = speed;
     }
@@ -109,20 +130,20 @@ public class Monster : MonoBehaviour
         hp -= 2;
         if (hp <= 0)
             Die();
-        Debug.Log("화상 데미지!!"+hp);
+        //Debug.Log("화상 데미지!!"+hp);
         yield return new WaitForSeconds(1f);
         StartCoroutine(FireDamage());
     }
     private IEnumerator WindDebuff()
     {
-        Debug.Log("바람 디버프 -- 추가데미지");
+        //Debug.Log("바람 디버프 -- 추가데미지");
         getDamageMulti = 1.3f;
         yield return new WaitForSeconds(2f);
         getDamageMulti = 1;
     }
     private IEnumerator ElecDebuff()
     {
-        Debug.Log("전기 디버프 -- 경직");
+        //Debug.Log("전기 디버프 -- 경직");
         agent.speed = speed;
         agent.speed *= 0;
         yield return new WaitForSeconds(0.5f);

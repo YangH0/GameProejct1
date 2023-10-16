@@ -27,8 +27,10 @@ public class UIManager : MonoBehaviour
 
     private List<TraitData> traitList = new List<TraitData>();
     private List<TraitData> traitSelectionList = new List<TraitData>();
+    private List<TraitData> ownTraitList = new List<TraitData>();
 
     private int randomNum;
+    private int traitCount = 0;
 
     private void Start()
     {
@@ -55,13 +57,27 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
         traitList.Clear();
         traitSelectionList.Clear();
-        for(int i = 0; i < traitData.Length; i++)
+        if(traitCount >= 6)
         {
-            if(traitData[i].curLevel < traitData[i].maxLevel)
+            for (int i = 0; i < ownTraitList.Count; i++)
             {
-                traitList.Add(traitData[i]);
+                if (ownTraitList[i].curLevel < ownTraitList[i].maxLevel)
+                {
+                    traitList.Add(ownTraitList[i]);
+                }
             }
         }
+        else
+        {
+            for (int i = 0; i < traitData.Length; i++)
+            {
+                if (traitData[i].curLevel < traitData[i].maxLevel)
+                {
+                    traitList.Add(traitData[i]);
+                }
+            }
+        }
+        
         for(int i = 0; i < 3; i++)
         {
             randomNum = Random.Range(0, traitList.Count);
@@ -88,6 +104,24 @@ public class UIManager : MonoBehaviour
 
         traitUpdate.UpdateTraitData(traitSelectionList[num]);
         traitUpdate.UpdateTraitValue();
+        if(traitSelectionList[num].traitName == "IceMagic" || traitSelectionList[num].traitName == "FireMagic"
+            || traitSelectionList[num].traitName == "WindMagic" || traitSelectionList[num].traitName == "ElecMagic")
+        {
+            traitData[0].curLevel = 1; traitData[1].curLevel = 1; traitData[2].curLevel = 1; traitData[3].curLevel = 1;
+        }
+        else
+        {
+            if(traitSelectionList[num].curLevel == 0)
+            {
+                ownTraitList.Add(traitSelectionList[num]);
+                traitCount++;
+            }
+        }
+        for (int i = 0; i < ownTraitList.Count; i++)
+        {
+            Debug.Log(ownTraitList.Count);
+            Debug.Log(ownTraitList[i].traitName);
+        }
         traitSelectionList[num].curLevel++;
         traitSet.SetActive(false);
         crossLine.SetActive(true);

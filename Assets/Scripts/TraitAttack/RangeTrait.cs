@@ -6,6 +6,7 @@ public class RangeTrait : MonoBehaviour
 {
     public float damage;
     public int debuffType;
+    public float setFalseTime;
 
     private void OnEnable()
     {
@@ -23,7 +24,7 @@ public class RangeTrait : MonoBehaviour
 
     IEnumerator SetFalse()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(setFalseTime);
         gameObject.SetActive(false);
     }
 }

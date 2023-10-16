@@ -61,6 +61,14 @@ public class TraitUpdate : MonoBehaviour
                     UpdateValue(1);
                 }
                 break;
+            case "IceField":
+                if (curLevel == 0)
+                    traitAttack.StartCoroutine(traitAttack.IceField());
+                else
+                {
+                    UpdateValue(2);
+                }
+                break;
             case "FireWall":
                 if (curLevel == 0)
                     traitAttack.StartCoroutine(traitAttack.FireWall());
@@ -75,6 +83,14 @@ public class TraitUpdate : MonoBehaviour
                 else
                 {
                     UpdateValue(4);
+                }
+                break;
+            case "FireField":
+                if (curLevel == 0)
+                    traitAttack.StartCoroutine(traitAttack.FireField());
+                else
+                {
+                    UpdateValue(5);
                 }
                 break;
             case "Wisp":
@@ -95,6 +111,15 @@ public class TraitUpdate : MonoBehaviour
 
                 }
                 break;
+            case "ElectricField":
+                if (curLevel == 0)
+                    traitAttack.StartCoroutine(traitAttack.ElectricField());
+                else
+                {
+                    UpdateValue(9);
+                    traitAttack.StartCoroutine(traitAttack.ElectricField());
+                }
+                break;
             case "Thunder":
                 if (curLevel == 0)
                     traitAttack.StartCoroutine(traitAttack.Thunder());
@@ -104,8 +129,17 @@ public class TraitUpdate : MonoBehaviour
 
                 }
                 break;
-            
-            
+            case "ThunderSpear":
+                if (curLevel == 0)
+                    traitAttack.StartCoroutine(traitAttack.ThunderSpear());
+                else
+                {
+                    UpdateValue(11);
+
+                }
+                break;
+
+
             case "FireMagic": // 불 기본공격
                 player.ChangeAutoAttack(1);
                 break;

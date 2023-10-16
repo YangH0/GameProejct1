@@ -34423,6 +34423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   debuffType: 2
+  setFalseTime: 2
 --- !u!1 &8327430469630983684
 GameObject:
   m_ObjectHideFlags: 0
