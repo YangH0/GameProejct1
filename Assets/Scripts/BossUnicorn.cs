@@ -28,6 +28,8 @@ public class BossUnicorn : Monster
 
     private int curPattern = 0;
 
+    private int num = 0;
+
     protected override void Awake()
     {
         base.Awake();
@@ -52,8 +54,9 @@ public class BossUnicorn : Monster
         agent.acceleration = 8f;
         agent.angularSpeed = 300;
         yield return new WaitForSeconds(2f);
-        int num = Random.Range(1, 4);
+        //int num = Random.Range(1, 4);
         //num = 2;
+        num++;
         switch (num)
         {
             case 1:

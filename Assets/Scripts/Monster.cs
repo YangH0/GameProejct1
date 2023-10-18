@@ -5,10 +5,8 @@ using UnityEngine.AI;
 
 public class Monster : MonoBehaviour
 {
-    [SerializeField]
     protected Player player;
-    [SerializeField]
-    private TraitAttack traitAttack;
+    protected TraitAttack traitAttack;
     [SerializeField]
     protected NavMeshAgent agent;
 
@@ -25,6 +23,7 @@ public class Monster : MonoBehaviour
     protected float curAttackTime = 0;
     public float exp;
 
+
     //디버프 수치
 
     protected virtual void Awake()
@@ -33,8 +32,15 @@ public class Monster : MonoBehaviour
         hp = maxHp;
         anim = GetComponent<Animator>();
         col = GetComponent<BoxCollider>();
+        player = FindObjectOfType<Player>();
+        traitAttack = FindObjectOfType<TraitAttack>();
     }
 
+    protected virtual void OnEnable()
+    {
+        SpawnSetting();
+    }
+    
     protected virtual void Update()
     {
         agent.SetDestination(player.transform.position);
@@ -95,19 +101,20 @@ public class Monster : MonoBehaviour
 
     protected virtual void SpawnSetting()
     {
-        anim.SetBool("bIsDie", false);
-        col.enabled = true;
-        agent.speed = speed;
         gameObject.SetActive(true);
+        agent.isStopped = false;
+        col.enabled = true;
+        hp = maxHp;
     }
 
     protected virtual IEnumerator DieSetting()
     {
+        agent.isStopped = true;
         traitAttack.DeleteMonster(this.gameObject);
-        anim.SetBool("bIsDie", true);
-        agent.speed = 0;
+        //anim.SetBool("bIsDie", true);
         col.enabled = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        //anim.SetBool("bIsDie", false);
         gameObject.SetActive(false);
     }
 

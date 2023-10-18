@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
     private int randomNum;
     private int traitCount = 0;
 
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < traitData.Length; i++)
         {
