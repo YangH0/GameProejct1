@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Meteor
   m_EditorClassIdentifier: 
   traitName: Meteor
+  traitType: 0
   Image: {fileID: 0}
-  curLevel: 0
+  curLevel: 1
   maxLevel: 5
   damageValue: 5
-  numValue: 0
-  coolTimeValue: 0.2
+  coolTimeValue: 0
   rangeValue: 0
+  numValue: 1
   pierce: 2

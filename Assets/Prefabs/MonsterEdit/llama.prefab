@@ -366,7 +366,7 @@ MonoBehaviour:
   exp: 5
   bullet: {fileID: 1576400206143827250, guid: ea0de580b6bfa054b96521a1350bb207, type: 3}
   bulletPosition: {fileID: 7691762732584059635}
-  rangeCol: {fileID: 0}
+  rangeCol: {fileID: 9110015664741041604}
   maxRangeAttackTime: 2
 --- !u!195 &1504183535428896934
 NavMeshAgent:

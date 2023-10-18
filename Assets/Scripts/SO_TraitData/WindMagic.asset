@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: WindMagic
   m_EditorClassIdentifier: 
   traitName: WindMagic
+  traitType: 0
   Image: {fileID: 0}
   curLevel: 0
   maxLevel: 1
   damageValue: 5
-  numValue: 0
   coolTimeValue: 0
   rangeValue: 0
+  numValue: 0
   pierce: 0

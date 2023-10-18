@@ -4716,8 +4716,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3371422353153649352}
-  - component: {fileID: 137721740213501770}
   - component: {fileID: 611081576572291609}
+  - component: {fileID: 6677933874197769193}
   m_Layer: 0
   m_Name: Tornado
   m_TagString: Untagged
@@ -4736,27 +4736,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.02, y: 0, z: 9.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 194767727213909562}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &137721740213501770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 783925780720520037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0effb9b6360df3b4387ef680e1d96bd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.2
-  damage: 0
-  pierce: 0
-  debuffType: 3
 --- !u!136 &611081576572291609
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4780,3 +4764,19 @@ CapsuleCollider:
   m_Height: 5
   m_Direction: 1
   m_Center: {x: 0, y: 1.35, z: 0}
+--- !u!114 &6677933874197769193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783925780720520037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2331433c3d24a5418ddd4328a972b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.2
+  damage: 0
+  debuffType: 3
+  range: 0

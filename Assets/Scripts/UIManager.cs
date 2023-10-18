@@ -66,6 +66,13 @@ public class UIManager : MonoBehaviour
                     traitList.Add(ownTraitList[i]);
                 }
             }
+            for(int i = 0; i < traitData.Length; i++)
+            {
+                if (traitData[i].curLevel < traitData[i].maxLevel && traitData[i].traitType == 1)
+                {
+                    traitList.Add(traitData[i]);
+                }
+            }
         }
         else
         {
@@ -111,7 +118,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            if(traitSelectionList[num].curLevel == 0)
+            if(traitSelectionList[num].curLevel == 0 && traitSelectionList[num].traitType == 0)
             {
                 ownTraitList.Add(traitSelectionList[num]);
                 traitCount++;

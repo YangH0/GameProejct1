@@ -8,14 +8,19 @@ public class ExplosiveBullet : MonoBehaviour
     [SerializeField] Explosive explosive;
     public float speed;
     public float damage;
+    public float range;
     public bool bIsHit;
     public int debuffType;
 
-    private void Start()
+    private Vector3 defaultRange;
+
+    private void Awake()
     {
         bullet.SetActive(true);
         explosive.gameObject.SetActive(false);
         bIsHit = false;
+
+        defaultRange = explosive.gameObject.transform.localScale;
     }
 
     private void OnEnable()
@@ -23,6 +28,13 @@ public class ExplosiveBullet : MonoBehaviour
         bullet.SetActive(true);
         explosive.gameObject.SetActive(false);
         bIsHit = false;
+        
+    }
+
+    public void UpdateScale()
+    {
+        explosive.gameObject.transform.localScale = (defaultRange * (range * 0.01f + 1));
+
     }
 
     void FixedUpdate()
@@ -44,6 +56,7 @@ public class ExplosiveBullet : MonoBehaviour
             {
                 bullet.SetActive(false);
                 explosive.gameObject.SetActive(true);
+                explosive.damage = damage;
                 bIsHit = true;
                 StartCoroutine(ActiveFalse());
             }

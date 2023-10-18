@@ -7,13 +7,14 @@ using UnityEngine.UI;
 public class TraitData : ScriptableObject
 {
     public string traitName;
+    public int traitType = 0;
     public Image Image;
     public int curLevel = 0;
     public int maxLevel;
     public float damageValue;
-    public float numValue;
     public float coolTimeValue;
     public float rangeValue;
+    public int numValue;
     public int pierce;
 
 }

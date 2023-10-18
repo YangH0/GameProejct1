@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: FireWall
   m_EditorClassIdentifier: 
   traitName: FireWall
+  traitType: 0
   Image: {fileID: 0}
   curLevel: 0
   maxLevel: 5
   damageValue: 5
-  numValue: 0
   coolTimeValue: 0.2
-  rangeValue: 0
+  rangeValue: 50
+  numValue: 0
   pierce: 0

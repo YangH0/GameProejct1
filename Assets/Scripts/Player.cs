@@ -14,7 +14,12 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject IceBullet;
     [SerializeField] GameObject WindBullet;
     [SerializeField] GameObject ElecBullet;
+    [SerializeField] GameObject o_Shield;
+    [SerializeField] GameObject o_ShieldImpact;
     private GameObject attackObj;
+
+    public float shieldCoolTime;
+    public float shieldDamage;
 
     List<GameObject> bulletList = new List<GameObject>();
 
@@ -25,13 +30,14 @@ public class Player : MonoBehaviour
 
     private float xMoveInput;
     private float zMoveInput;
-    private float walkSpeed = 5;
-    private float runSpeed = 10;
+    public float walkSpeed = 5;
+    public float runSpeed = 10;
     private float curAttackTime;
     public float maxAttackTime;
     public float maxHp;
-    private float hp;
+    public float hp;
     private float exp = 0;
+    public float expMulti;
     public float maxExp;
     public float autoAttackDamage;
 
@@ -39,6 +45,8 @@ public class Player : MonoBehaviour
 
 
     private bool bIsRun;
+    private bool bIsShield = false;
+    private bool bIsShieldImpact = false;
 
     private void Awake()
     {
@@ -91,7 +99,7 @@ public class Player : MonoBehaviour
                 newObj.transform.rotation = Quaternion.LookRotation(shootTarget);
 
                 Bullet bul = newObj.GetComponent<Bullet>();
-                bul.damage = autoAttackDamage * traitAttack.ManaDamage;
+                bul.damage = autoAttackDamage;
             }
             else if(attackType == 1)
             {
@@ -107,7 +115,7 @@ public class Player : MonoBehaviour
                 newObj.transform.rotation = Quaternion.LookRotation(shootTarget);
 
                 Explosive bul = newObj.GetComponent<Explosive>();
-                bul.damage = autoAttackDamage;
+                bul.damage = autoAttackDamage*1.3f;
                 StartCoroutine(IceSword(newObj));
             }
             else if(attackType == 3)
@@ -124,7 +132,7 @@ public class Player : MonoBehaviour
                 newObj.transform.rotation = Quaternion.LookRotation(shootTarget);
 
                 Bullet bul = newObj.GetComponent<Bullet>();
-                bul.damage = autoAttackDamage * traitAttack.ManaDamage;
+                bul.damage = autoAttackDamage;
             }
             
             curAttackTime = 0;
@@ -143,22 +151,18 @@ public class Player : MonoBehaviour
             case 1:
                 attackObj = fireBullet;
                 attackType = 1;
-                autoAttackDamage = 10;
                 break;
             case 2:
                 attackObj = IceBullet;
                 attackType = 2;
-                autoAttackDamage = 10;
                 break;
             case 3:
                 attackObj = WindBullet;
                 attackType = 3;
-                autoAttackDamage = 10;
                 break;
             case 4:
                 attackObj = ElecBullet;
                 attackType = 4;
-                autoAttackDamage = 10;
                 break;
 
         }
@@ -210,6 +214,13 @@ public class Player : MonoBehaviour
 
     public void GetDamage(float dmg)
     {
+        if (bIsShield)
+        {
+            if (bIsShieldImpact) return;
+
+            StartCoroutine(ShieldImpact());
+            return;
+        }
         hp -= dmg;
         uiManager.SetHpUI(hp);
         Debug.Log(hp);
@@ -221,7 +232,7 @@ public class Player : MonoBehaviour
 
     public void GetExp(float m_exp)
     {
-        exp += m_exp;
+        exp += (m_exp*(expMulti*0.01f+1));
 
         if (exp >= maxExp) //·¹º§¾÷
         {
@@ -238,5 +249,25 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
         obj.SetActive(false);
+    }
+
+    public IEnumerator Shield()
+    {
+        yield return new WaitForSeconds(shieldCoolTime);
+        o_Shield.SetActive(true);
+        bIsShield = true;
+    }
+    private IEnumerator ShieldImpact()
+    {
+        Explosive s = o_ShieldImpact.GetComponent<Explosive>();
+        s.damage = shieldDamage;
+        bIsShieldImpact = true;
+        o_ShieldImpact.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        o_Shield.SetActive(false);
+        bIsShield = false;
+        bIsShieldImpact = false;
+        o_ShieldImpact.SetActive(false);
+        StartCoroutine(Shield());
     }
 }

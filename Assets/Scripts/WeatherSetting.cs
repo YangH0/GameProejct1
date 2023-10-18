@@ -60,14 +60,12 @@ public class WeatherSetting : MonoBehaviour
         switch (curType)
         {
             case 0:
-                traitAttack.ManaDamage += value;
                 break;
         }
         
         switch (preType)
         {
             case 0:
-                traitAttack.ManaDamage -= value;
                 break;
         }
     }

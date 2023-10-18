@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: FireField
   Image: {fileID: 0}
-  curLevel: 1
+  curLevel: 2
   maxLevel: 5
-  damageValue: 5
-  numValue: 0
+  damageValue: 0
   coolTimeValue: 0
-  rangeValue: 0
+  rangeValue: 50
+  numValue: 0
   pierce: 0

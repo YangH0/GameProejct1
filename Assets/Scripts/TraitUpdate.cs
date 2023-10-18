@@ -13,9 +13,9 @@ public class TraitUpdate : MonoBehaviour
     private string traitName;
     private int curLevel;
     private float damageValue;
-    private float numValue;
     private float coolTimeValue;
     private float rangeValue;
+    private int numValue;
     private int pierce;
     int iNum;
 
@@ -39,12 +39,29 @@ public class TraitUpdate : MonoBehaviour
     {
         switch (traitName)
         {
-            case "AutoAttack1":
+            case "AttackDamage":
                 player.autoAttackDamage += damageValue;
                 iNum = (int)(player.maxAttackTime * 10);
                 iNum -= (int)(coolTimeValue * 10);
                 player.maxAttackTime = (float)iNum * 0.1f;
                 break;
+            case "AttackSpeed":
+                iNum = (int)(player.maxAttackTime * 10);
+                iNum -= (int)(coolTimeValue * 10);
+                player.maxAttackTime = (float)iNum * 0.1f;
+                break;
+            case "HpUp":
+                player.maxHp += damageValue;
+                player.hp += damageValue;
+                break;
+            case "SpeedUp":
+                player.walkSpeed += damageValue;
+                player.runSpeed += damageValue;
+                break;
+            case "ExpUp":
+                player.expMulti += damageValue;
+                break;
+
             case "IceBomb":
                 if (curLevel == 0)
                     traitAttack.StartCoroutine(traitAttack.IceBomb());
@@ -91,6 +108,7 @@ public class TraitUpdate : MonoBehaviour
                 else
                 {
                     UpdateValue(5);
+                    traitAttack.StartCoroutine(traitAttack.FireField());
                 }
                 break;
             case "Wisp":
@@ -100,6 +118,18 @@ public class TraitUpdate : MonoBehaviour
                 {
                     UpdateValue(6);
 
+                }
+                traitAttack.SpawnWisp(curLevel);
+                break;
+            case "Shield":
+                if (curLevel == 0)
+                    player.StartCoroutine(player.Shield());
+                else
+                {
+                    iNum = (int)(player.shieldCoolTime * 10);
+                    iNum -= (int)(coolTimeValue * 10);
+                    player.shieldCoolTime = (float)iNum * 0.1f;
+                    player.shieldDamage += damageValue;
                 }
                 break;
             case "Tornado":
@@ -165,9 +195,6 @@ public class TraitUpdate : MonoBehaviour
                 explanation += player.autoAttackDamage.ToString() + "->" + (player.autoAttackDamage + damageValue).ToString() +"\n";
                 explanation += player.maxAttackTime.ToString() + "->" + (player.maxAttackTime-coolTimeValue).ToString();
                 break;
-            case "ManaElemental":
-                explanation += traitAttack.ManaDamage.ToString() + "->" + (traitAttack.ManaDamage + damageValue).ToString() + "\n";
-                break;
             case "Test1":
                 explanation += traitAttack.traitInfo[0].damage.ToString() + "->" + (traitAttack.traitInfo[0].damage + damageValue).ToString() + "\n";
                 explanation += traitAttack.traitInfo[0].coolTime.ToString() + "->" + (traitAttack.traitInfo[0].coolTime - coolTimeValue).ToString();
@@ -188,6 +215,8 @@ public class TraitUpdate : MonoBehaviour
     private void UpdateValue(int i)
     {
         traitAttack.traitInfo[i].damage += damageValue;
+        traitAttack.traitInfo[i].num += numValue;
+        traitAttack.traitInfo[i].range += rangeValue;
         iNum = (int)(traitAttack.traitInfo[i].coolTime * 10);
         iNum -= (int)(coolTimeValue * 10);
         traitAttack.traitInfo[i].coolTime = (float)iNum * 0.1f;

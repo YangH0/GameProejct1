@@ -16,8 +16,8 @@ MonoBehaviour:
   Image: {fileID: 0}
   curLevel: 0
   maxLevel: 1
-  damageValue: 5
-  numValue: 0
+  damageValue: 0
   coolTimeValue: 0
   rangeValue: 0
+  numValue: 0
   pierce: 0

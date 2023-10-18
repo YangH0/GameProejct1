@@ -14,4 +14,5 @@ public class Explosive : MonoBehaviour
             monster.GetDamage(damage, debuffType);
         }
     }
+    
 }

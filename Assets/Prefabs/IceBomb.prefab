@@ -9813,7 +9813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debuffType: 1
-  damage: 5
+  damage: 0
 --- !u!1 &6437476471927975230
 GameObject:
   m_ObjectHideFlags: 0
@@ -14656,6 +14656,7 @@ MonoBehaviour:
   explosive: {fileID: 7617051992785442602}
   speed: 0.3
   damage: 0
+  range: 0
   bIsHit: 0
   debuffType: 1
 --- !u!54 &377429152579941611

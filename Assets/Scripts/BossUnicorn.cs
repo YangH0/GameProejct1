@@ -53,11 +53,11 @@ public class BossUnicorn : Monster
         agent.angularSpeed = 300;
         yield return new WaitForSeconds(2f);
         int num = Random.Range(1, 4);
-        num = 3;
+        //num = 2;
         switch (num)
         {
             case 1:
-                StartCoroutine(Pattern_2());
+                StartCoroutine(Pattern_1());
                 break;
             case 2:
                 StartCoroutine(Pattern_2());
@@ -100,7 +100,7 @@ public class BossUnicorn : Monster
                                                             1,
                                                             transform.position.z + ((player.transform.position.z - transform.position.z) / 2));
         pattern2_HitRange.transform.localScale = new Vector3(2, 0.8f, (player.transform.position - gameObject.transform.position).magnitude * 1.4f);
-        targetPosition = player.transform.position;
+        targetPosition =transform.position +  (player.transform.position-transform.position)*1.2f;
 
         yield return new WaitForSeconds(1f);
         Debug.Log("Rush_Start");
