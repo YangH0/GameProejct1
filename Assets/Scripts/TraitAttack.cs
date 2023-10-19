@@ -153,7 +153,7 @@ public class TraitAttack : MonoBehaviour
                 traitInfo[2].traitList.Add(newObj);
             }
 
-            newObj.transform.position = new Vector3(transform.position.x, 1.6f,transform.position.z);
+            newObj.transform.position = transform.position;
             //newObj.transform.rotation = Quaternion.LookRotation(nearObject.transform.position - transform.position);
 
             RangeTrait bul = newObj.GetComponent<RangeTrait>();
