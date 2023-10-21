@@ -32,6 +32,8 @@ public class UIManager : MonoBehaviour
     private int randomNum;
     private int traitCount = 0;
 
+    private bool bIsTrait = false;
+
     private void Awake()
     {
         for (int i = 0; i < traitData.Length; i++)
@@ -43,7 +45,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !bIsTrait)
         {
             if (!SettingMenu.activeSelf)
                 SetSettingMenu(true);
@@ -54,6 +56,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateTraitSelection()
     {
+        bIsTrait = true;
         Time.timeScale = 0;
         traitList.Clear();
         traitSelectionList.Clear();
@@ -105,6 +108,7 @@ public class UIManager : MonoBehaviour
 
     public void SelectTrait(int num)
     {
+        bIsTrait = false;
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

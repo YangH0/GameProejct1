@@ -10,6 +10,9 @@ public class Monster : MonoBehaviour
     [SerializeField]
     protected NavMeshAgent agent;
 
+    [SerializeField]
+    protected GameObject boneDummy;
+
     private Animator anim;
     private BoxCollider col;
 
@@ -23,6 +26,9 @@ public class Monster : MonoBehaviour
     protected float curAttackTime = 0;
     public float exp;
 
+    private Vector3 dummyPosition;
+    private Vector3 dummyRotation;
+
 
     //디버프 수치
 
@@ -34,6 +40,10 @@ public class Monster : MonoBehaviour
         col = GetComponent<BoxCollider>();
         player = FindObjectOfType<Player>();
         traitAttack = FindObjectOfType<TraitAttack>();
+
+        dummyPosition = boneDummy.transform.localPosition;
+        dummyRotation = boneDummy.transform.rotation.eulerAngles;
+
     }
 
     protected virtual void OnEnable()
@@ -101,6 +111,7 @@ public class Monster : MonoBehaviour
 
     protected virtual void SpawnSetting()
     {
+        
         gameObject.SetActive(true);
         agent.isStopped = false;
         col.enabled = true;
@@ -111,10 +122,12 @@ public class Monster : MonoBehaviour
     {
         agent.isStopped = true;
         traitAttack.DeleteMonster(this.gameObject);
-        //anim.SetBool("bIsDie", true);
+        anim.SetBool("bIsDie", true);
         col.enabled = false;
-        yield return new WaitForSeconds(1f);
-        //anim.SetBool("bIsDie", false);
+        yield return new WaitForSeconds(2f);
+        boneDummy.gameObject.transform.rotation = Quaternion.Euler(dummyRotation);
+        boneDummy.gameObject.transform.localPosition = dummyPosition;
+        anim.SetBool("bIsDie", false);
         gameObject.SetActive(false);
     }
 
