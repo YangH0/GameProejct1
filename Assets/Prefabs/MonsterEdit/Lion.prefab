@@ -62,8 +62,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.83, y: 1.42, z: 11.83}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5290657338459220366}
   - {fileID: 8477519348467244392}
@@ -85,10 +85,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af34e9a5579a144d9d8712a60e8b522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  traitAttack: {fileID: 0}
   agent: {fileID: 4310545085991026549}
-  speed: 3
+  boneDummy: {fileID: 2032845913379275497}
+  speed: 7
   maxHp: 40
   damage: 5
   maxAttackTime: 0.2

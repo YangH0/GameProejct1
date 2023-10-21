@@ -122,12 +122,12 @@ public class Monster : MonoBehaviour
     {
         agent.isStopped = true;
         traitAttack.DeleteMonster(this.gameObject);
-        anim.SetBool("bIsDie", true);
+        //anim.SetBool("bIsDie", true);
         col.enabled = false;
         yield return new WaitForSeconds(2f);
         boneDummy.gameObject.transform.rotation = Quaternion.Euler(dummyRotation);
         boneDummy.gameObject.transform.localPosition = dummyPosition;
-        anim.SetBool("bIsDie", false);
+        //anim.SetBool("bIsDie", false);
         gameObject.SetActive(false);
     }
 

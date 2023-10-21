@@ -418,8 +418,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.75, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7469696715859928170}
   - {fileID: 3320002619207378372}
@@ -440,7 +440,7 @@ MonoBehaviour:
   agent: {fileID: 8967764233893735585}
   boneDummy: {fileID: 7879749051273383734}
   speed: 2
-  maxHp: 10
+  maxHp: 80
   damage: 5
   maxAttackTime: 5
   exp: 5
