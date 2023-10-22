@@ -17,6 +17,8 @@ public class MonsterSpawner : MonoBehaviour
     private List<GameObject> lionPool = new List<GameObject>();
     private List<GameObject> elephantPool = new List<GameObject>();
 
+    private int monsterNum = 0;
+
 
     private void Start()
     {
@@ -38,26 +40,29 @@ public class MonsterSpawner : MonoBehaviour
 
     private IEnumerator StartSpawn()
     {
-        int num = Random.Range(1, 4);
+        int num = Random.Range(1, 6);
 
         switch (num)
         {
             case 1:
-                Spawnmonster(llama,llamaPool);
+                Spawnmonster(rabbit, rabbitPool);
                 break;
             case 2:
                 Spawnmonster(boar, boarPool);
                 break;
             case 3:
-                Spawnmonster(lion, lionPool);
+                Spawnmonster(llama, llamaPool);
                 break;
             case 4:
-                Spawnmonster(rabbit, rabbitPool);
+                Spawnmonster(lion, lionPool);
+                break;
+            case 5:
+                Spawnmonster(elephant, elephantPool);
                 break;
 
         }
-        yield return new WaitForSeconds(5f);
-        //StartCoroutine(StartSpawn());
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(StartSpawn());
     }
 
     public void Spawnmonster(GameObject obj,List<GameObject> pool)
@@ -90,16 +95,16 @@ public class MonsterSpawner : MonoBehaviour
         switch (direction)
         {
             case 1:
-                randomPosition = new Vector3(Random.Range(-50,51), 1, -35);
+                randomPosition = new Vector3(Random.Range(-70,51), 1, -58);
                 break;
             case 2:
-                randomPosition = new Vector3(-56, 1, Random.Range(-35, 40));
+                randomPosition = new Vector3(-72, 1, Random.Range(-54, 70));
                 break;
             case 3:
-                randomPosition = new Vector3(Random.Range(-50, 51), 1, 40);
+                randomPosition = new Vector3(Random.Range(-70, 51), 1, 70);
                 break;
             case 4:
-                randomPosition = new Vector3(54, 1, Random.Range(-35, 40));
+                randomPosition = new Vector3(51, 1, Random.Range(-54, 70));
                 break;
         }
 

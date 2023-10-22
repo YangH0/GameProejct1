@@ -13,18 +13,20 @@ public class Monster : MonoBehaviour
     [SerializeField]
     protected GameObject boneDummy;
 
-    private Animator anim;
+    protected Animator anim;
     private BoxCollider col;
 
     [SerializeField]
     protected float speed;
     public float maxHp;
-    private float hp = 0;
+    protected float hp = 0;
     public float damage;
     private float getDamageMulti = 1;
     public float maxAttackTime;
-    protected float curAttackTime = 0;
+    //protected float curAttackTime = 0;
     public float exp;
+
+    private bool bIsCoolTime;
 
     private Vector3 dummyPosition;
     private Vector3 dummyRotation;
@@ -54,7 +56,7 @@ public class Monster : MonoBehaviour
     protected virtual void Update()
     {
         agent.SetDestination(player.transform.position);
-        curAttackTime += Time.deltaTime;
+        //curAttackTime += Time.deltaTime;
     }
 
     public void GetDamage(float damage, int debuffType = 2)
@@ -76,11 +78,19 @@ public class Monster : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            if (curAttackTime < maxAttackTime)
+            if (bIsCoolTime)
                 return;
+            StartCoroutine(AttackCoolTime());
             player.GetDamage(damage);
-            curAttackTime = 0;
+            //curAttackTime = 0;
         }
+    }
+
+    private IEnumerator AttackCoolTime()
+    {
+        bIsCoolTime = true;
+        yield return new WaitForSeconds(maxAttackTime);
+        bIsCoolTime = false;
     }
 
     private void Debuff(int debuffType)
@@ -120,6 +130,7 @@ public class Monster : MonoBehaviour
 
     protected virtual IEnumerator DieSetting()
     {
+        
         agent.isStopped = true;
         traitAttack.DeleteMonster(this.gameObject);
         //anim.SetBool("bIsDie", true);

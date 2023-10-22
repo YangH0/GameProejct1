@@ -34,5 +34,10 @@ public class Tornado : MonoBehaviour
             monster.GetDamage(damage, debuffType);
 
         }
+        else if (other.gameObject.tag == "Obstacle")
+        {
+            gameObject.SetActive(false);
+
+        }
     }
 }

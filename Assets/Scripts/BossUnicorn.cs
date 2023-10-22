@@ -38,7 +38,7 @@ public class BossUnicorn : Monster
     }
     protected override void Update()
     {
-        curAttackTime += Time.deltaTime;
+        //curAttackTime += Time.deltaTime;
         
         if (bIsPattern)
             return;
@@ -49,6 +49,8 @@ public class BossUnicorn : Monster
 
     private IEnumerator SetPattern()
     {
+        if (hp <= 0)
+            StopCoroutine(SetPattern());
         curPattern = 0;
         agent.speed = speed;
         agent.acceleration = 8f;
