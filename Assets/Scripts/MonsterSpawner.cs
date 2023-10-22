@@ -12,60 +12,136 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField] GameObject Unicorn;
 
     private List<GameObject> rabbitPool = new List<GameObject>();
-    public List<GameObject> llamaPool = new List<GameObject>();
+    private List<GameObject> llamaPool = new List<GameObject>();
     private List<GameObject> boarPool = new List<GameObject>();
     private List<GameObject> lionPool = new List<GameObject>();
     private List<GameObject> elephantPool = new List<GameObject>();
 
-    private int monsterNum = 0;
+    public List<GameObject> monsters = new List<GameObject>();
 
+    public int curTime = 0;
 
     private void Start()
     {
-        
+        StartCoroutine(StartTimer());
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(StartSpawn());
-        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             GameObject newObj = Instantiate(Unicorn);
             newObj.transform.position = new Vector3(0, 5, 0);
         }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            curTime++;
+            Debug.Log(curTime);
+        }
     }
 
-    private IEnumerator StartSpawn()
+    private IEnumerator SpawnMonster(int num, float time , int randomMin, int randomMax)
     {
-        int num = Random.Range(1, 6);
+        int randomNum = Random.Range(randomMin, randomMax + 1);
 
+        if (monsters.Count >= 50)
+        {
+            yield return new WaitForSeconds(time);
+            StartCoroutine(SpawnMonster(num, time, randomMin, randomMax));
+            yield break;
+        }
+
+        for(int i = 0; i < randomNum; i++)
+        {
+            switch (num)
+            {
+                case 1:
+                    MonsterPool(rabbit, rabbitPool);
+                    break;
+                case 2:
+                    MonsterPool(boar, boarPool);
+                    break;
+                case 3:
+                    MonsterPool(lion, lionPool);
+                    break;
+                case 4:
+                    MonsterPool(llama, llamaPool);
+                    break;
+                case 5:
+                    MonsterPool(elephant, elephantPool);
+                    break;
+
+            }
+        }
+        
+        yield return new WaitForSeconds(time);
+        StartCoroutine(SpawnMonster(num,time, randomMin, randomMax));
+    }
+
+    private void ChangeMonsterSpawn(int num)
+    {
         switch (num)
         {
-            case 1:
-                Spawnmonster(rabbit, rabbitPool);
-                break;
-            case 2:
-                Spawnmonster(boar, boarPool);
-                break;
-            case 3:
-                Spawnmonster(llama, llamaPool);
-                break;
-            case 4:
-                Spawnmonster(lion, lionPool);
-                break;
-            case 5:
-                Spawnmonster(elephant, elephantPool);
-                break;
+            case 0: // 0 ~ 3 분
+                StartCoroutine(SpawnMonster(1, 1,1 , 3));
 
+                break;
+            case 3: // 3 ~ 5 분
+                StartCoroutine(SpawnMonster(1, 1, 2, 4));
+                StartCoroutine(SpawnMonster(2, 5, 1, 2));
+                StartCoroutine(SpawnMonster(3, 6, 1, 1));
+                break;
+            case 5: // 5 ~ 7 분
+                StartCoroutine(SpawnMonster(1, 1, 2, 4));
+                StartCoroutine(SpawnMonster(2, 4, 2, 3));
+                StartCoroutine(SpawnMonster(3, 5, 1, 3));
+                StartCoroutine(SpawnMonster(4, 6, 1, 2));
+                break;
+            case 7: // 7 ~  분
+                StartCoroutine(SpawnMonster(1, 1, 4, 5));
+                StartCoroutine(SpawnMonster(2, 3, 2, 4));
+                StartCoroutine(SpawnMonster(3, 4, 1, 3));
+                StartCoroutine(SpawnMonster(4, 4, 2, 3));
+                StartCoroutine(SpawnMonster(5, 6, 1, 3));
+                break;
         }
-        yield return new WaitForSeconds(2f);
-        StartCoroutine(StartSpawn());
+
     }
 
-    public void Spawnmonster(GameObject obj,List<GameObject> pool)
+    IEnumerator StartTimer()
+    {
+        switch (curTime)
+        {
+            case 0:
+                ResetSpawn();
+                ChangeMonsterSpawn(0);
+                break;
+            case 20:
+                ResetSpawn();
+                ChangeMonsterSpawn(3);
+                break;
+            case 40:
+                ResetSpawn();
+                ChangeMonsterSpawn(5);
+                break;
+            case 60:
+                ResetSpawn();
+                ChangeMonsterSpawn(7);
+                break;
+        }
+        yield return new WaitForSeconds(1f);
+        curTime++;
+        Debug.Log(curTime);
+        StartCoroutine(StartTimer());
+    }
+
+    private void ResetSpawn()
+    {
+        for (int i = 0; i < 5; i++)
+            StopCoroutine("SpawnMonster");
+    }
+
+    public void MonsterPool(GameObject obj,List<GameObject> pool)
     {
         GameObject spawnObj = null;
 
@@ -83,9 +159,13 @@ public class MonsterSpawner : MonoBehaviour
             spawnObj = Instantiate(obj);
             pool.Add(spawnObj);
         }
-
+        monsters.Add(spawnObj);
         spawnObj.transform.position = GetRandomPosition();
+    }
 
+    public void DeleteMonsterSpawner(GameObject obj)
+    {
+        monsters.Remove(obj);
     }
 
     private Vector3 GetRandomPosition()

@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     private float exp = 0;
     public float expMulti;
     public float maxExp;
+    public float ExpLevelUp;
     public float autoAttackDamage;
 
     private int attackType=0;
@@ -237,7 +238,7 @@ public class Player : MonoBehaviour
         if (exp >= maxExp) //·¹º§¾÷
         {
             exp -= maxExp;
-            maxExp *= 1.5f;
+            maxExp *= ExpLevelUp;
             uiManager.SetMaxExpUI(maxExp);
             uiManager.LevelUp();
         }

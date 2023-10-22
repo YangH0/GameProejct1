@@ -128,11 +128,7 @@ public class UIManager : MonoBehaviour
                 traitCount++;
             }
         }
-        for (int i = 0; i < ownTraitList.Count; i++)
-        {
-            Debug.Log(ownTraitList.Count);
-            Debug.Log(ownTraitList[i].traitName);
-        }
+        
         traitSelectionList[num].curLevel++;
         traitSet.SetActive(false);
         crossLine.SetActive(true);

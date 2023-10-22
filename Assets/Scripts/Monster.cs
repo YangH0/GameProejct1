@@ -11,6 +11,9 @@ public class Monster : MonoBehaviour
     protected NavMeshAgent agent;
 
     [SerializeField]
+    protected MonsterSpawner spawner;
+
+    [SerializeField]
     protected GameObject boneDummy;
 
     protected Animator anim;
@@ -42,6 +45,7 @@ public class Monster : MonoBehaviour
         col = GetComponent<BoxCollider>();
         player = FindObjectOfType<Player>();
         traitAttack = FindObjectOfType<TraitAttack>();
+        spawner = FindObjectOfType<MonsterSpawner>();
 
         dummyPosition = boneDummy.transform.localPosition;
         dummyRotation = boneDummy.transform.rotation.eulerAngles;
@@ -50,6 +54,7 @@ public class Monster : MonoBehaviour
 
     protected virtual void OnEnable()
     {
+
         SpawnSetting();
     }
     
@@ -121,7 +126,6 @@ public class Monster : MonoBehaviour
 
     protected virtual void SpawnSetting()
     {
-        
         gameObject.SetActive(true);
         agent.isStopped = false;
         col.enabled = true;
@@ -133,10 +137,11 @@ public class Monster : MonoBehaviour
         
         agent.isStopped = true;
         traitAttack.DeleteMonster(this.gameObject);
+        spawner.DeleteMonsterSpawner(this.gameObject);
         //anim.SetBool("bIsDie", true);
         col.enabled = false;
         yield return new WaitForSeconds(2f);
-        boneDummy.gameObject.transform.rotation = Quaternion.Euler(dummyRotation);
+        boneDummy.gameObject.transform.localRotation = Quaternion.Euler(dummyRotation);
         boneDummy.gameObject.transform.localPosition = dummyPosition;
         //anim.SetBool("bIsDie", false);
         gameObject.SetActive(false);
@@ -146,7 +151,7 @@ public class Monster : MonoBehaviour
     {
         agent.speed = speed;
         agent.speed *= 0.3f;
-        Debug.Log("얼음 디버프--슬로우");
+        //Debug.Log("얼음 디버프--슬로우");
         yield return new WaitForSeconds(3f);
         agent.speed = speed;
     }
@@ -161,20 +166,20 @@ public class Monster : MonoBehaviour
         hp -= 2;
         if (hp <= 0)
             Die();
-        Debug.Log("화상 데미지!!"+hp);
+        //Debug.Log("화상 데미지!!"+hp);
         yield return new WaitForSeconds(1f);
         StartCoroutine(FireDamage());
     }
     private IEnumerator WindDebuff()
     {
-        Debug.Log("바람 디버프 -- 추가데미지");
+        //Debug.Log("바람 디버프 -- 추가데미지");
         getDamageMulti = 1.3f;
         yield return new WaitForSeconds(2f);
         getDamageMulti = 1;
     }
     private IEnumerator ElecDebuff()
     {
-        Debug.Log("전기 디버프 -- 경직");
+        //Debug.Log("전기 디버프 -- 경직");
         agent.speed = speed;
         agent.speed *= 0;
         yield return new WaitForSeconds(0.5f);
