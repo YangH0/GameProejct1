@@ -28,13 +28,9 @@ public class BossUnicorn : Monster
 
     private int curPattern = 0;
 
-    private int num = 0;
-
     protected override void Awake()
     {
         base.Awake();
-        StartCoroutine(SetPattern());
-
     }
     protected override void Update()
     {
@@ -46,6 +42,31 @@ public class BossUnicorn : Monster
         agent.SetDestination(player.transform.position);
     }
 
+    protected override void SpawnSetting()
+    {
+        base.SpawnSetting();
+        StartCoroutine(SetPattern());
+
+    }
+
+    public void StopPattern()
+    {
+        Debug.Log("Stop!!!!!!!!!");
+        StopCoroutine(Pattern_1());
+        StopCoroutine(Pattern_2());
+        StopCoroutine(Pattern_3());
+        StopCoroutine(SetPattern());
+        pattern1_HitRange.SetActive(false);
+        pattern1_Laser.SetActive(false);
+
+        pattern2_HitRange.SetActive(false);
+        pattern2_HitCollider.SetActive(false);
+
+        pattern3_HitRange.SetActive(false);
+        pattern3_HitRange2.SetActive(false);
+        pattern3_HitRange3.SetActive(false);
+        pattern3_HitCollider.SetActive(false);
+    }
 
     private IEnumerator SetPattern()
     {
@@ -56,9 +77,7 @@ public class BossUnicorn : Monster
         agent.acceleration = 8f;
         agent.angularSpeed = 300;
         yield return new WaitForSeconds(2f);
-        //int num = Random.Range(1, 4);
-        //num = 2;
-        num++;
+        int num = Random.Range(1, 4);
         switch (num)
         {
             case 1:
@@ -76,25 +95,30 @@ public class BossUnicorn : Monster
     private IEnumerator Pattern_1()
     {
         curPattern = 1;
+        anim.SetInteger("Pattern", curPattern);
         agent.speed = 0;
+        agent.isStopped = true;
         agent.acceleration = 8f;
         Debug.Log("Laser_Ready");
         pattern1_HitRange.SetActive(true);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
 
         Debug.Log("Laser_Start");
         pattern1_HitRange.SetActive(false);
         pattern1_Laser.SetActive(true);
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3.5f);
+        agent.isStopped = false;
         pattern1_Laser.SetActive(false);
+        anim.SetInteger("Pattern", 0);
         StartCoroutine(SetPattern());
     }
     private IEnumerator Pattern_2()
     {
         Debug.Log("Rush_Ready");
         curPattern = 2;
+        anim.SetInteger("Pattern", curPattern);
         agent.speed = 0;
         agent.angularSpeed = 0;
         agent.isStopped = true;
@@ -120,11 +144,13 @@ public class BossUnicorn : Monster
         yield return new WaitForSeconds(0.5f);
         bIsPattern = false;
         pattern2_HitCollider.SetActive(false);
+        anim.SetInteger("Pattern", 0);
         StartCoroutine(SetPattern());
     }
     private IEnumerator Pattern_3()
     {
         curPattern = 3; // 준비 단계
+        anim.SetInteger("Pattern", curPattern);
         agent.speed = 0;
         agent.angularSpeed = 0;
         agent.isStopped = true;
@@ -133,17 +159,17 @@ public class BossUnicorn : Monster
         pattern3_HitRange.SetActive(true);
         pattern3_HitRange.transform.position = new Vector3(targetPosition.x, 0.15f, targetPosition.z); // 첫번째 위치 세팅
 
-        yield return new WaitForSeconds(0.8f);// 두번째 위치 세팅
+        yield return new WaitForSeconds(0.3f);// 두번째 위치 세팅
         targetPosition2 = player.transform.position;
         pattern3_HitRange2.SetActive(true);
         pattern3_HitRange2.transform.position = new Vector3(targetPosition2.x, 0.15f, targetPosition2.z);
 
-        yield return new WaitForSeconds(0.8f);// 세번째 위치 세팅
+        yield return new WaitForSeconds(0.3f);// 세번째 위치 세팅
         targetPosition3 = player.transform.position;
         pattern3_HitRange3.SetActive(true);
         pattern3_HitRange3.transform.position = new Vector3(targetPosition3.x, 0.15f, targetPosition3.z);
 
-        yield return new WaitForSeconds(2f);// 첫번째 위치로 이동
+        yield return new WaitForSeconds(0.3f);// 첫번째 위치로 이동
         agent.isStopped = false;
         bIsPattern = true;
         pattern3_HitRange.SetActive(false);
@@ -156,7 +182,7 @@ public class BossUnicorn : Monster
         yield return new WaitForSeconds(0.3f); // 이동 후 히트 콜라이더 실행
         pattern3_HitCollider.SetActive(true);
 
-        yield return new WaitForSeconds(0.2f); // 두번째 위치로 이동
+        yield return new WaitForSeconds(0.3f); // 두번째 위치로 이동
         agent.isStopped = false;
         bIsPattern = true;
         pattern3_HitCollider.SetActive(false);
@@ -166,8 +192,7 @@ public class BossUnicorn : Monster
 
         yield return new WaitForSeconds(0.3f); // 이동 후 히트 콜라이더 실행
         pattern3_HitCollider.SetActive(true);
-
-        yield return new WaitForSeconds(0.2f); // 세번째 위치로 이동
+        yield return new WaitForSeconds(0.3f); // 세번째 위치로 이동
         agent.isStopped = false;
         bIsPattern = true;
         pattern3_HitCollider.SetActive(false);
@@ -177,14 +202,13 @@ public class BossUnicorn : Monster
 
         yield return new WaitForSeconds(0.3f); // 이동 후 히트 콜라이더 실행
         pattern3_HitCollider.SetActive(true);
-        
-        yield return new WaitForSeconds(0.2f); //
+        yield return new WaitForSeconds(0.3f); //
         pattern3_HitCollider.SetActive(false);
 
         yield return new WaitForSeconds(1f); // 패턴 끝
         bIsPattern = false;
         pattern2_HitCollider.SetActive(false);
-
+        anim.SetInteger("Pattern", 0);
         StartCoroutine(SetPattern());
         yield break;
     }

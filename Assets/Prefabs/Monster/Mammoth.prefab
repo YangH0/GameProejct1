@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af34e9a5579a144d9d8712a60e8b522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  traitAttack: {fileID: 0}
   agent: {fileID: 8214806713773748530}
+  spawner: {fileID: 0}
+  boneDummy: {fileID: 0}
   speed: 1.5
   maxHp: 80
   damage: 10
@@ -176,4 +176,4 @@ NavMeshAgent:
   m_Height: 4.086333
   m_BaseOffset: 2.0431664
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1

@@ -245,9 +245,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 4026879565743006188}
+  spawner: {fileID: 0}
   boneDummy: {fileID: 2911831203581761382}
   speed: 3
-  maxHp: 100
+  maxHp: 50
   damage: 5
   maxAttackTime: 0.2
   exp: 10
