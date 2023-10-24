@@ -78,6 +78,12 @@ public class MonsterSpawner : MonoBehaviour
         StartCoroutine(SpawnMonster(num,time, randomMin, randomMax));
     }
 
+    private void SpawnBoss()
+    {
+        GameObject newObj = Instantiate(Unicorn);
+        newObj.transform.position = GetRandomPosition();
+    }
+
     private void ChangeMonsterSpawn(int num)
     {
         switch (num)
@@ -127,6 +133,9 @@ public class MonsterSpawner : MonoBehaviour
             case 60:
                 ResetSpawn();
                 ChangeMonsterSpawn(7);
+                break;
+            case 100:
+                SpawnBoss();
                 break;
         }
         yield return new WaitForSeconds(1f);

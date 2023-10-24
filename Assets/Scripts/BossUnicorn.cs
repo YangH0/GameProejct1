@@ -130,7 +130,7 @@ public class BossUnicorn : Monster
                                                             1,
                                                             transform.position.z + ((player.transform.position.z - transform.position.z) / 2));
         pattern2_HitRange.transform.localScale = new Vector3(2, 0.8f, (player.transform.position - gameObject.transform.position).magnitude * 1.4f);
-        targetPosition =transform.position +  (player.transform.position-transform.position)*1.2f;
+        targetPosition =transform.position +  (player.transform.position-transform.position)*1.05f;
 
         yield return new WaitForSeconds(1f);
         Debug.Log("Rush_Start");
@@ -142,7 +142,7 @@ public class BossUnicorn : Monster
         agent.speed = 1000f;
         agent.acceleration = 500f;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         bIsPattern = false;
         pattern2_HitCollider.SetActive(false);
         anim.SetInteger("Pattern", 0);
