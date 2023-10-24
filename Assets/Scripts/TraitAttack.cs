@@ -310,7 +310,7 @@ public class TraitAttack : MonoBehaviour
                 traitInfo[8].traitList.Add(newObj);
             }
 
-            newObj.transform.position = transform.position;
+            newObj.transform.position = new Vector3(transform.position.x, 0.94f, transform.position.z);
             newObj.transform.rotation = Quaternion.LookRotation(nearObject.transform.position - transform.position);
             newObj.transform.rotation = Quaternion.Euler(new Vector3(0, newObj.transform.rotation.eulerAngles.y, 0));
 

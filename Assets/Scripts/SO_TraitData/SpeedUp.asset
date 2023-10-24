@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: SpeedUp
   traitType: 1
-  Image: {fileID: 0}
+  Image: {fileID: 21300024, guid: 3bf81844dedc1ad42bbdaafb092bb8af, type: 3}
   curLevel: 0
   maxLevel: 5
   damageValue: 1

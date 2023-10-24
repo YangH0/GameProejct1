@@ -8,7 +8,7 @@ public class TraitData : ScriptableObject
 {
     public string traitName;
     public int traitType = 0;
-    public Image Image;
+    public Sprite Image;
     public int curLevel = 0;
     public int maxLevel;
     public float damageValue;

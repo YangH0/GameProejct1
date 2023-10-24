@@ -98,9 +98,8 @@ public class UIManager : MonoBehaviour
         for(int i = 0; i < 3; i++)
         {
             traitUpdate.UpdateTraitData(traitSelectionList[i]);
-            traitUpdate.UpdateTraitText();
-            traitName[i].text = traitSelectionList[i].traitName;
-            traitImage[i] = traitSelectionList[i].Image;
+            traitName[i].text = traitUpdate.UpdateTraitText();
+            traitImage[i].sprite = traitSelectionList[i].Image;
             levelChange[i].text = traitSelectionList[i].curLevel.ToString() + "->" + (traitSelectionList[i].curLevel+1).ToString();
             explanation[i].text = traitUpdate.explanation;
         }

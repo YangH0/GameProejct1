@@ -172,7 +172,7 @@ public class Player : MonoBehaviour
     private void SetAim()
     {
         Debug.DrawRay(cam.transform.position, cam.transform.forward * 15, Color.red);
-        shootTarget = cam.transform.position + cam.transform.forward * 30;
+        shootTarget = cam.transform.position + cam.transform.forward * 50;
         shootTarget = (shootTarget - transform.position).normalized;
         Debug.DrawRay(transform.position, shootTarget * 10, Color.red);
     }

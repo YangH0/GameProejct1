@@ -438,6 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 8967764233893735585}
+  spawner: {fileID: 0}
   boneDummy: {fileID: 7879749051273383734}
   speed: 2
   maxHp: 80
@@ -476,7 +477,7 @@ Animator:
   m_GameObject: {fileID: 5401059667947600888}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: e5ee801562651d34b9509076ec286632, type: 2}
+  m_Controller: {fileID: 9100000, guid: 97a4a6cf62078d84c8f532ab62b5c9ec, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

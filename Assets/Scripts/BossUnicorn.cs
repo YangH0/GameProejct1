@@ -108,9 +108,10 @@ public class BossUnicorn : Monster
         pattern1_HitRange.SetActive(false);
         pattern1_Laser.SetActive(true);
 
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(3.0f);
         agent.isStopped = false;
         pattern1_Laser.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
         anim.SetInteger("Pattern", 0);
         StartCoroutine(SetPattern());
     }

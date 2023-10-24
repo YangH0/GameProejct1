@@ -11,4 +11,13 @@ public class TitleUIManager : MonoBehaviour
     {
         SceneManager.LoadScene("inGameScene");
     }
+
+    public void GameExit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }
