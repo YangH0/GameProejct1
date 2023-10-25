@@ -341,11 +341,11 @@ MonoBehaviour:
   agent: {fileID: 1554248601923732997}
   spawner: {fileID: 0}
   boneDummy: {fileID: 6810165348823053562}
-  speed: 2
-  maxHp: 10
-  damage: 5
+  speed: 4
+  maxHp: 250
+  damage: 7
   maxAttackTime: 0.5
-  exp: 10
+  exp: 100
 --- !u!95 &8374515825925756871
 Animator:
   serializedVersion: 5

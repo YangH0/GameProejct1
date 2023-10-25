@@ -17,8 +17,8 @@ MonoBehaviour:
   Image: {fileID: 21300024, guid: 3bf81844dedc1ad42bbdaafb092bb8af, type: 3}
   curLevel: 0
   maxLevel: 5
-  damageValue: 5
-  coolTimeValue: 0.2
-  rangeValue: 0
+  damageValue: 1
+  coolTimeValue: 0.1
+  rangeValue: 5
   numValue: 0
   pierce: 0

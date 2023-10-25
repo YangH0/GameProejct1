@@ -4970,7 +4970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.2
   damage: 0
-  pierce: 4
+  pierce: 5
   debuffType: 3
 --- !u!54 &2067400770465643403
 Rigidbody:

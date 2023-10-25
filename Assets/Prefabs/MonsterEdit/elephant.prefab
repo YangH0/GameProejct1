@@ -441,10 +441,10 @@ MonoBehaviour:
   spawner: {fileID: 0}
   boneDummy: {fileID: 7879749051273383734}
   speed: 2
-  maxHp: 80
-  damage: 5
-  maxAttackTime: 5
-  exp: 5
+  maxHp: 1000
+  damage: 50
+  maxAttackTime: 1
+  exp: 300
 --- !u!195 &8967764233893735585
 NavMeshAgent:
   m_ObjectHideFlags: 0

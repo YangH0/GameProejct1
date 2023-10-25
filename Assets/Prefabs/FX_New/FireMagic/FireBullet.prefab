@@ -29504,7 +29504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 851981789762980424}
   explosive: {fileID: 1660030263543184039}
-  speed: 0.3
+  speed: 1
   damage: 0
   range: 0
   bIsHit: 0

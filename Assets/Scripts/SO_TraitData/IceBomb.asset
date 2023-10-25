@@ -15,10 +15,10 @@ MonoBehaviour:
   traitName: IceBomb
   traitType: 0
   Image: {fileID: 21300024, guid: 3bf81844dedc1ad42bbdaafb092bb8af, type: 3}
-  curLevel: 0
+  curLevel: 1
   maxLevel: 5
-  damageValue: 5
-  coolTimeValue: 0.2
-  rangeValue: 50
+  damageValue: 10
+  coolTimeValue: 1
+  rangeValue: 5
   numValue: 0
   pierce: 2

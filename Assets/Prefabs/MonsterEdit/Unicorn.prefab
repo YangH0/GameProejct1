@@ -248,10 +248,10 @@ MonoBehaviour:
   spawner: {fileID: 0}
   boneDummy: {fileID: 2911831203581761382}
   speed: 3
-  maxHp: 50
+  maxHp: 3000
   damage: 5
   maxAttackTime: 0.2
-  exp: 10
+  exp: 3000
   pattern1_HitRange: {fileID: 668261238206639851}
   pattern1_Laser: {fileID: 953400294130770164}
   pattern2_HitRange: {fileID: 7047800775870501940}
@@ -260,9 +260,9 @@ MonoBehaviour:
   pattern3_HitRange2: {fileID: 2274054599513279911}
   pattern3_HitRange3: {fileID: 6820017908452127964}
   pattern3_HitCollider: {fileID: 3854855644132578993}
-  pattern1_Damage: 5
-  pattern2_Damage: 5
-  pattern3_Damage: 5
+  pattern1_Damage: 50
+  pattern2_Damage: 30
+  pattern3_Damage: 20
 --- !u!195 &4026879565743006188
 NavMeshAgent:
   m_ObjectHideFlags: 0

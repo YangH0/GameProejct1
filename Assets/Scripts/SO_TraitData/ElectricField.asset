@@ -19,6 +19,6 @@ MonoBehaviour:
   maxLevel: 5
   damageValue: 5
   coolTimeValue: 0
-  rangeValue: 50
+  rangeValue: 5
   numValue: 0
   pierce: 0

@@ -359,15 +359,15 @@ MonoBehaviour:
   agent: {fileID: 1504183535428896934}
   spawner: {fileID: 0}
   boneDummy: {fileID: 4524479955697219235}
-  speed: 5
-  maxHp: 40
+  speed: 10
+  maxHp: 200
   damage: 10
   maxAttackTime: 0.2
-  exp: 5
+  exp: 100
   bullet: {fileID: 1576400206143827250, guid: ea0de580b6bfa054b96521a1350bb207, type: 3}
   bulletPosition: {fileID: 7691762732584059635}
   rangeCol: {fileID: 9110015664741041604}
-  maxRangeAttackTime: 2
+  maxRangeAttackTime: 1.5
 --- !u!195 &1504183535428896934
 NavMeshAgent:
   m_ObjectHideFlags: 0

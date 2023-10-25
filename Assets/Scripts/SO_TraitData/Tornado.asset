@@ -18,7 +18,7 @@ MonoBehaviour:
   curLevel: 0
   maxLevel: 5
   damageValue: 5
-  coolTimeValue: 0.2
-  rangeValue: 50
+  coolTimeValue: 0.6
+  rangeValue: 8
   numValue: 0
   pierce: 0
