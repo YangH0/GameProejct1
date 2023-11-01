@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject o_Shield;
     [SerializeField] GameObject o_ShieldImpact;
     private GameObject attackObj;
+
+    private Animator anim;
 
     public float shieldCoolTime;
     public float shieldDamage;
@@ -46,11 +49,13 @@ public class Player : MonoBehaviour
 
 
     private bool bIsRun;
+    private bool bIsCombo = false;
     private bool bIsShield = false;
     private bool bIsShieldImpact = false;
 
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         hp = maxHp;
@@ -79,6 +84,8 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButton(0) && !bIsRun &&curAttackTime > maxAttackTime)
         {
             GameObject newObj = null;
+            SetAttackAnim();
+
             for (int i = 0; i < bulletList.Count; i++)
             {
                 if (!bulletList[i].activeSelf)
@@ -140,6 +147,31 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void SetAttackAnim()
+    {
+        //if (!bIsCombo && anim.GetBool("bIsAttack"))
+        //{
+        //    bIsCombo = true;
+        //    return;
+        //}
+        anim.SetBool("bIsAttack", true);
+
+    }
+
+    public void SetAttackFalse()
+    {
+        //if (!bIsCombo)
+        //{
+        //    anim.SetBool("bIsAttack", false);
+        //    bIsCombo = false;
+        //}
+        //else
+        //{
+
+        //}
+        anim.SetBool("bIsAttack", false);
+    }
+
     public void ChangeAutoAttack(int num)
     {
         for(int i = 0; i < bulletList.Count; i++)
@@ -172,7 +204,7 @@ public class Player : MonoBehaviour
     private void SetAim()
     {
         Debug.DrawRay(cam.transform.position, cam.transform.forward * 15, Color.red);
-        shootTarget = cam.transform.position + cam.transform.forward * 50;
+        shootTarget = cam.transform.position + cam.transform.forward * 100;
         shootTarget = (shootTarget - transform.position).normalized;
         Debug.DrawRay(transform.position, shootTarget * 10, Color.red);
     }
@@ -181,7 +213,15 @@ public class Player : MonoBehaviour
     {
         xMoveInput = Input.GetAxisRaw("Horizontal");
         zMoveInput = Input.GetAxisRaw("Vertical");
-        CheckRun();
+        if (xMoveInput != 0 || zMoveInput != 0)
+        {
+            anim.SetBool("bIsWalk", true);
+            CheckRun();
+        }
+        else
+        {
+            anim.SetBool("bIsWalk", false);
+        }
 
         playerVelocity = new Vector3(xMoveInput, 0, zMoveInput);
         playerVelocity = cam.transform.TransformDirection(playerVelocity);
@@ -198,10 +238,12 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             bIsRun = true;
+            anim.SetBool("bIsRun", true);
         }
         else
         {
             bIsRun = false;
+            anim.SetBool("bIsRun", false);
         }
     }
 
@@ -228,6 +270,9 @@ public class Player : MonoBehaviour
         if(hp < 0)
         {
             gameObject.SetActive(false);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("TitleScene");
         }
     }
 
@@ -243,7 +288,12 @@ public class Player : MonoBehaviour
             uiManager.LevelUp();
         }
         uiManager.SetExpUI(exp);
+    }
 
+    public void SetHpSlide()
+    {
+        uiManager.SetMaxHpUI(maxHp);
+        uiManager.SetHpUI(hp);
     }
 
     private IEnumerator IceSword(GameObject obj)

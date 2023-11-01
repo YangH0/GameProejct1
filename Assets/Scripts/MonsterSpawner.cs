@@ -89,23 +89,23 @@ public class MonsterSpawner : MonoBehaviour
         switch (num)
         {
             case 0: // 0 ~ 3 분
-                StartCoroutine(SpawnMonster(1, 1,1 , 3));
+                StartCoroutine(SpawnMonster(1, 1,1 , 2));
 
                 break;
             case 3: // 3 ~ 5 분
-                StartCoroutine(SpawnMonster(1, 1, 2, 4));
+                StartCoroutine(SpawnMonster(1, 1, 1, 2));
                 StartCoroutine(SpawnMonster(2, 5, 1, 2));
                 StartCoroutine(SpawnMonster(3, 6, 1, 1));
                 break;
             case 5: // 5 ~ 7 분
-                StartCoroutine(SpawnMonster(1, 1, 2, 4));
+                StartCoroutine(SpawnMonster(1, 1, 1, 2));
                 StartCoroutine(SpawnMonster(2, 4, 2, 3));
                 StartCoroutine(SpawnMonster(3, 5, 1, 3));
                 StartCoroutine(SpawnMonster(4, 6, 1, 2));
                 break;
             case 7: // 7 ~  분
-                StartCoroutine(SpawnMonster(1, 1, 4, 5));
-                StartCoroutine(SpawnMonster(2, 3, 2, 4));
+                StartCoroutine(SpawnMonster(1, 1, 2, 3));
+                StartCoroutine(SpawnMonster(2, 3, 2, 3));
                 StartCoroutine(SpawnMonster(3, 4, 1, 3));
                 StartCoroutine(SpawnMonster(4, 4, 2, 3));
                 StartCoroutine(SpawnMonster(5, 6, 1, 3));

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: ThunderSpear
   traitType: 0
-  Image: {fileID: 21300024, guid: 3bf81844dedc1ad42bbdaafb092bb8af, type: 3}
+  Image: {fileID: 0}
   curLevel: 0
   maxLevel: 5
   damageValue: 10
   coolTimeValue: 0.6
-  rangeValue: 0
+  rangeValue: 5
   numValue: 0
   pierce: 2

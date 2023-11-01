@@ -54,10 +54,11 @@ public class TraitUpdate : MonoBehaviour
             case "HpUp":
                 player.maxHp += damageValue;
                 player.hp += damageValue;
+                player.SetHpSlide();
                 break;
             case "SpeedUp":
                 player.walkSpeed += damageValue;
-                player.runSpeed += damageValue;
+                player.runSpeed += damageValue*1.5f;
                 break;
             case "ExpUp":
                 player.expMulti += damageValue;
@@ -200,7 +201,8 @@ public class TraitUpdate : MonoBehaviour
                 break;
             case "AttackSpeed":
                 explanation += "기본 공격속도가 증가합니다" + "\n" +
-                player.maxAttackTime.ToString() + "초 -> " + (player.maxAttackTime - coolTimeValue).ToString() + "초";
+                player.maxAttackTime.ToString() + "초 -> " + 
+                ((float)((int)(player.maxAttackTime * 10) - (int)(coolTimeValue * 10)) * 0.1f).ToString() + "초";
                 UIName = "공격 속도 증가";
                 break;
             case "HpUp":
@@ -288,7 +290,8 @@ public class TraitUpdate : MonoBehaviour
                 else
                 {
                     explanation += "충격파 데미지 : " + player.shieldDamage.ToString() + "->" + (player.shieldDamage + damageValue).ToString() + "\n" +
-                        "쿨타임 : " + player.shieldCoolTime.ToString() + "초 -> " + (player.shieldCoolTime + coolTimeValue).ToString() + "초";
+                        "쿨타임 : " + player.shieldCoolTime.ToString() + "초 -> " +
+                        ((float)((int)(player.shieldCoolTime * 10) - (int)(coolTimeValue * 10)) * 0.1f).ToString() + "초";
                 }
                 UIName = "보호막";
                 break;
@@ -361,7 +364,8 @@ public class TraitUpdate : MonoBehaviour
                 text = "데미지 : " + traitAttack.traitInfo[traitnum].damage.ToString() + "->" + (traitAttack.traitInfo[traitnum].damage + damageValue).ToString() + "\n";
                 break;
             case 1:
-                text = "쿨타임 : " + traitAttack.traitInfo[traitnum].coolTime.ToString() + "초 -> " + (traitAttack.traitInfo[traitnum].damage + coolTimeValue).ToString() + "초" + "\n";
+                text = "쿨타임 : " + traitAttack.traitInfo[traitnum].coolTime.ToString() + "초 -> " + 
+                    ((float)((int)(traitAttack.traitInfo[traitnum].coolTime * 10)- (int)(coolTimeValue * 10))*0.1f).ToString() + "초" + "\n";
                 break;
             case 2:
                 text = "범위 : " + (traitAttack.traitInfo[traitnum].range + 100).ToString() + "%->" + (traitAttack.traitInfo[traitnum].range + rangeValue + 100).ToString() + "%" + "\n";

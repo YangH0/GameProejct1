@@ -163,7 +163,7 @@ public class Monster : MonoBehaviour
     }
     private IEnumerator FireDamage()
     {
-        hp -= 2;
+        hp -= 1;
         if (hp <= 0)
             Die();
         //Debug.Log("화상 데미지!!"+hp);

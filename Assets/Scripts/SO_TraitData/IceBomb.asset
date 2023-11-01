@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: IceBomb
   traitType: 0
-  Image: {fileID: 21300024, guid: 3bf81844dedc1ad42bbdaafb092bb8af, type: 3}
-  curLevel: 1
+  Image: {fileID: 21300000, guid: 2385ddc0dd6404f419ca001251b20b69, type: 3}
+  curLevel: 0
   maxLevel: 5
   damageValue: 10
   coolTimeValue: 1
