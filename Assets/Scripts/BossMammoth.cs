@@ -73,7 +73,7 @@ public class BossMammoth : Monster
         agent.angularSpeed = 300;
         yield return new WaitForSeconds(5f);
         int num = Random.Range(1, 4);
-        //num = 3;
+        //num = 1;
         switch (num)
         {
             case 1:

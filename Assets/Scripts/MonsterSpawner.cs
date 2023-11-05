@@ -36,7 +36,7 @@ public class MonsterSpawner : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             curTime++;
-            Debug.Log(curTime);
+            //Debug.Log(curTime);
         }
     }
 

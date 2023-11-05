@@ -343,11 +343,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3491100988430616796}
+  - component: {fileID: 9185515209056754483}
   - component: {fileID: 5130332007873943285}
   - component: {fileID: 3098417970889035217}
   - component: {fileID: 3109840715745785609}
   - component: {fileID: 6227449051957506418}
-  - component: {fileID: 9185515209056754483}
   m_Layer: 0
   m_Name: mommoth
   m_TagString: Monster
@@ -374,6 +374,37 @@ Transform:
   - {fileID: 8606078970259678644}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9185515209056754483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3947524277250601887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f0045520e36394e9d08eaa03c6dbf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 5130332007873943285}
+  spawner: {fileID: 0}
+  boneDummy: {fileID: 7418228353919184776}
+  speed: 2
+  maxHp: 100
+  damage: 10
+  maxAttackTime: 0.5
+  exp: 10
+  pattern1_HitRange: {fileID: 0}
+  pattern1_Stone: {fileID: 9150642433849502251, guid: 37be53666185a76499d926ef4cb87f88, type: 3}
+  pattern1_pos: {fileID: 1862765996333816045}
+  pattern2_HitRange: {fileID: 2629657514901644855}
+  pattern2_HitCollider: {fileID: 7604788449237382924}
+  pattern3_HitRange: {fileID: 0}
+  pattern3_HitCollider: {fileID: 0}
+  pattern1_Damage: 20
+  pattern2_WalkSpeed: 5
+  pattern2_RunSpeed: 8
+  pattern3_Damage: 20
 --- !u!195 &5130332007873943285
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -465,37 +496,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &9185515209056754483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3947524277250601887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45f0045520e36394e9d08eaa03c6dbf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 5130332007873943285}
-  spawner: {fileID: 0}
-  boneDummy: {fileID: 7418228353919184776}
-  speed: 2
-  maxHp: 100
-  damage: 10
-  maxAttackTime: 0.5
-  exp: 10
-  pattern1_HitRange: {fileID: 0}
-  pattern1_Stone: {fileID: 9150642433849502251, guid: 37be53666185a76499d926ef4cb87f88, type: 3}
-  pattern1_pos: {fileID: 1862765996333816045}
-  pattern2_HitRange: {fileID: 2629657514901644855}
-  pattern2_HitCollider: {fileID: 7604788449237382924}
-  pattern3_HitRange: {fileID: 0}
-  pattern3_HitCollider: {fileID: 0}
-  pattern1_Damage: 20
-  pattern2_WalkSpeed: 5
-  pattern2_RunSpeed: 8
-  pattern3_Damage: 20
 --- !u!1 &4074794757566874614
 GameObject:
   m_ObjectHideFlags: 0
