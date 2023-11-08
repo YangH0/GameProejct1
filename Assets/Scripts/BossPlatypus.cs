@@ -114,7 +114,8 @@ public class BossPlatypus : Monster
     private void RotateToPlayer()
     {
         Vector3 target = (player.transform.position - gameObject.transform.position).normalized;
-        transform.rotation = Quaternion.LookRotation(new Vector3(target.x, 0, target.z));
+        Quaternion targetrotation = Quaternion.LookRotation(new Vector3(target.x, 0, target.z));
+        transform.rotation = Quaternion.Lerp(targetrotation, transform.rotation, 0.8f);
     }
 
     private void OnTriggerEnter(Collider other)

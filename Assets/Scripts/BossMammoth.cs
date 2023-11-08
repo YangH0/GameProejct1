@@ -25,6 +25,7 @@ public class BossMammoth : Monster
     public float pattern3_Damage;
 
     private int curPattern = 0;
+    private int num = 0;
 
     protected override void Awake()
     {
@@ -72,8 +73,9 @@ public class BossMammoth : Monster
         agent.acceleration = 8f;
         agent.angularSpeed = 300;
         yield return new WaitForSeconds(5f);
-        int num = Random.Range(1, 4);
+        //int num = Random.Range(1, 4);
         //num = 1;
+        num++;
         switch (num)
         {
             case 1:
@@ -118,7 +120,7 @@ public class BossMammoth : Monster
         pattern2_HitRange.transform.rotation = Quaternion.LookRotation(player.transform.position - gameObject.transform.position);
         pattern2_HitRange.transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
         pattern2_HitRange.transform.position = new Vector3(transform.position.x + ((player.transform.position.x - transform.position.x) / 2),
-                                                            1,
+                                                            -0.39f,
                                                             transform.position.z + ((player.transform.position.z - transform.position.z) / 2));
         pattern2_HitRange.transform.localScale = new Vector3(2, 0.8f, (player.transform.position - gameObject.transform.position).magnitude * 1.4f);
         targetPosition =transform.position +  (player.transform.position-transform.position)*1.05f;
