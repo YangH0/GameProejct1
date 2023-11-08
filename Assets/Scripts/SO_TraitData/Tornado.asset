@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: Tornado
   traitType: 0
-  Image: {fileID: 0}
-  curLevel: 0
+  Image: {fileID: 21300000, guid: e3d28e724cf7c4640895ca298e99553e, type: 3}
+  curLevel: 1
   maxLevel: 5
   damageValue: 5
   coolTimeValue: 0.6

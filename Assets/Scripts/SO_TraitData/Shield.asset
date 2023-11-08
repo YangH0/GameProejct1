@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: Shield
   traitType: 0
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 246372be9c6eb0f4ca012c485ff7cbec, type: 3}
   curLevel: 0
   maxLevel: 5
   damageValue: 10

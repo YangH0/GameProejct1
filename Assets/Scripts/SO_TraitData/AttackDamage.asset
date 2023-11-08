@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: AttackDamage
   traitType: 1
-  Image: {fileID: 0}
-  curLevel: 0
+  Image: {fileID: 21300000, guid: 5dda5c473b0868841944401eba6aea72, type: 3}
+  curLevel: 1
   maxLevel: 5
   damageValue: 20
   coolTimeValue: 0

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: WindMagic
   traitType: 0
-  Image: {fileID: 0}
-  curLevel: 0
+  Image: {fileID: 21300000, guid: 0c92c5b588f59a8489d5d272dd5519bf, type: 3}
+  curLevel: 1
   maxLevel: 1
   damageValue: 5
   coolTimeValue: 0

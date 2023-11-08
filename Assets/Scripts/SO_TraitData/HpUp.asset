@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: HpUp
   traitType: 1
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 6d66076421e3fc64aaaa07c60359e039, type: 3}
   curLevel: 0
   maxLevel: 5
   damageValue: 50

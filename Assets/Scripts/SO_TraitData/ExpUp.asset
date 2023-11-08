@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: ExpUp
   traitType: 1
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 3442a6bc99a7c3242908c42eef50fec3, type: 3}
   curLevel: 0
   maxLevel: 5
   damageValue: 10
