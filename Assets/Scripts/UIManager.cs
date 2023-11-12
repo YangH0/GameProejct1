@@ -19,6 +19,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] Slider hpSlider;
     [SerializeField] Slider expSlider;
 
+    [SerializeField] GameObject[] UI_Trait;
+    [SerializeField] Image[] UI_traitImage;
+    [SerializeField] TextMeshProUGUI[] UI_Level;
+
     [SerializeField] CinemachineFreeLook freelook;
 
     [SerializeField] GameObject traitSet;
@@ -31,6 +35,7 @@ public class UIManager : MonoBehaviour
 
     private int randomNum;
     private int traitCount = 0;
+    private int magicNum = -1;
 
     private bool bIsTrait = false;
 
@@ -48,7 +53,11 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && !bIsTrait)
         {
             if (!SettingMenu.activeSelf)
+            {
                 SetSettingMenu(true);
+                SetTraitUI();
+            }
+
             else
                 SetSettingMenu(false);
         }
@@ -118,6 +127,21 @@ public class UIManager : MonoBehaviour
             || traitSelectionList[num].traitName == "WindMagic" || traitSelectionList[num].traitName == "ElecMagic")
         {
             traitData[0].curLevel = 1; traitData[1].curLevel = 1; traitData[2].curLevel = 1; traitData[3].curLevel = 1;
+            switch (traitSelectionList[num].traitName)
+            {
+                case "IceMagic":
+                    magicNum = 0;
+                    break;
+                case "FireMagic":
+                    magicNum = 1;
+                    break;
+                case "WindMagic":
+                    magicNum = 2;
+                    break;
+                case "ElecMagic":
+                    magicNum = 3;
+                    break;
+            }
         }
         else
         {
@@ -170,6 +194,35 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 1;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    private void SetTraitUI()
+    {
+        int count = 0;
+        Debug.Log(ownTraitList.Count);
+
+        if (magicNum != -1)
+        {
+            UI_Trait[count].SetActive(true);
+            UI_traitImage[count].sprite = traitData[magicNum].Image;
+            UI_Level[count++].text = (traitData[magicNum].curLevel-1).ToString();
+        }
+
+        for(int i = 0; i < ownTraitList.Count; i++)
+        {
+            UI_Trait[count].SetActive(true);
+            UI_traitImage[count].sprite = ownTraitList[i].Image;
+            UI_Level[count++].text = ownTraitList[i].curLevel.ToString();
+        }
+        for (int i = 0; i < traitData.Length; i++)
+        {
+            if (traitData[i].curLevel>0 && traitData[i].traitType == 1)
+            {
+                UI_Trait[count].SetActive(true);
+                UI_traitImage[count].sprite = traitData[i].Image;
+                UI_Level[count++].text = traitData[i].curLevel.ToString();
+            }
         }
     }
     

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: ElecMagic
   traitType: 0
-  Image: {fileID: 0}
-  curLevel: 0
+  Image: {fileID: 21300000, guid: 3ca2e3e9e3228b441af9c002a3d54b83, type: 3}
+  curLevel: 2
   maxLevel: 1
   damageValue: 5
   coolTimeValue: 0

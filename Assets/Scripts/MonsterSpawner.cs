@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class MonsterSpawner : MonoBehaviour
 {
+    [SerializeField] GameObject bossCam;
+    [SerializeField] GameObject playerCam;
+    [SerializeField] CinemachineBrain brain;
+
     [SerializeField] GameObject rabbit;
     [SerializeField] GameObject llama;
     [SerializeField] GameObject boar;
     [SerializeField] GameObject lion;
     [SerializeField] GameObject elephant;
     [SerializeField] GameObject Unicorn;
+    [SerializeField] GameObject Mammoth;
+    [SerializeField] GameObject Platypus;
 
     private List<GameObject> rabbitPool = new List<GameObject>();
     private List<GameObject> llamaPool = new List<GameObject>();
@@ -30,8 +37,17 @@ public class MonsterSpawner : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            GameObject newObj = Instantiate(Unicorn);
-            newObj.transform.position = new Vector3(0, 5, 0);
+            SpawnBoss(1);
+            //GameObject newObj = Instantiate(Unicorn);
+            //newObj.transform.position = new Vector3(0, 5, 0);
+        }
+        else if(Input.GetKeyDown(KeyCode.T))
+        {
+            SpawnBoss(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Y))
+        {
+            SpawnBoss(3);
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -78,10 +94,25 @@ public class MonsterSpawner : MonoBehaviour
         StartCoroutine(SpawnMonster(num,time, randomMin, randomMax));
     }
 
-    private void SpawnBoss()
+    private void SpawnBoss(int num)
     {
-        GameObject newObj = Instantiate(Unicorn);
+        GameObject newObj = null;
+        switch (num)
+        {
+            case 1:
+                newObj = Instantiate(Unicorn);
+                break;
+            case 2:
+                newObj = Instantiate(Mammoth);
+                break;
+            case 3:
+                newObj = Instantiate(Platypus);
+                break;
+        }
+
         newObj.transform.position = GetRandomPosition();
+        newObj.transform.rotation = Quaternion.LookRotation(-newObj.transform.position);
+        StartCoroutine(BossCamAnimation(newObj));
     }
 
     private void ChangeMonsterSpawn(int num)
@@ -111,7 +142,6 @@ public class MonsterSpawner : MonoBehaviour
                 StartCoroutine(SpawnMonster(5, 6, 1, 3));
                 break;
         }
-
     }
 
     IEnumerator StartTimer()
@@ -135,7 +165,7 @@ public class MonsterSpawner : MonoBehaviour
                 ChangeMonsterSpawn(7);
                 break;
             case 100:
-                SpawnBoss();
+                SpawnBoss(1);
                 break;
         }
         yield return new WaitForSeconds(1f);
@@ -199,6 +229,22 @@ public class MonsterSpawner : MonoBehaviour
 
 
         return randomPosition;
+    }
+
+    private IEnumerator BossCamAnimation(GameObject boss)
+    {
+        brain.m_IgnoreTimeScale = true;
+        bossCam.transform.position = new Vector3(boss.transform.position.x+ boss.transform.forward.x * 15
+                                                , 10
+                                                , boss.transform.position.z + boss.transform.forward.z * 20);
+        bossCam.transform.rotation = Quaternion.LookRotation(boss.transform.position- bossCam.transform.position);
+        Time.timeScale = 0f;
+        playerCam.SetActive(false);
+        yield return new WaitForSecondsRealtime(3f);
+        playerCam.SetActive(true);
+        yield return new WaitForSecondsRealtime(2f);
+        Time.timeScale = 1f;
+        brain.m_IgnoreTimeScale = false;
     }
 
 

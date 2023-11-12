@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: Thunder
   traitType: 0
-  Image: {fileID: 0}
-  curLevel: 3
+  Image: {fileID: 21300000, guid: d66669e2f801bdf4181342fcb3d59d4f, type: 3}
+  curLevel: 0
   maxLevel: 5
   damageValue: 8
   coolTimeValue: 2
