@@ -509,7 +509,7 @@ MonoBehaviour:
   maxAttackTime: 1
   exp: 10
   pattern1_HitRange: {fileID: 0}
-  pattern1_Stone: {fileID: 2425661686261056274, guid: 60baf25ae0709ee4aab7f790a82abce8, type: 3}
+  pattern1_Stone: {fileID: 1127870524031175605, guid: 716d8724ba88e0940a96103ba847be15, type: 3}
   pattern1_pos: {fileID: 1481311918229524030}
   pattern2_HitRange: {fileID: 4183119636370586660}
   pattern2_HitCollider: {fileID: 3849614411195047525}

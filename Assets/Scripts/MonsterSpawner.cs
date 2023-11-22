@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
+using TMPro;
 
 public class MonsterSpawner : MonoBehaviour
 {
@@ -25,6 +27,9 @@ public class MonsterSpawner : MonoBehaviour
     private List<GameObject> elephantPool = new List<GameObject>();
 
     public List<GameObject> monsters = new List<GameObject>();
+
+    public GameObject bossNameUI;
+    public TextMeshProUGUI bossName;
 
     public int curTime = 0;
 
@@ -110,9 +115,20 @@ public class MonsterSpawner : MonoBehaviour
                 break;
         }
 
-        newObj.transform.position = GetRandomPosition();
+        newObj.transform.position = new Vector3(0,0,0);
         newObj.transform.rotation = Quaternion.LookRotation(-newObj.transform.position);
-        StartCoroutine(BossCamAnimation(newObj));
+        switch (num)
+        {
+            case 1:
+                StartCoroutine(BossCamAnimation(newObj,"유니콘"));
+                break;
+            case 2:
+                StartCoroutine(BossCamAnimation(newObj, "맘모스"));
+                break;
+            case 3:
+                StartCoroutine(BossCamAnimation(newObj, "오리너구리"));
+                break;
+        }
     }
 
     private void ChangeMonsterSpawn(int num)
@@ -231,8 +247,11 @@ public class MonsterSpawner : MonoBehaviour
         return randomPosition;
     }
 
-    private IEnumerator BossCamAnimation(GameObject boss)
+    private IEnumerator BossCamAnimation(GameObject boss, string name)
     {
+        yield return new WaitForSecondsRealtime(0.1f);
+        bossNameUI.SetActive(true);
+        bossName.text = name;
         brain.m_IgnoreTimeScale = true;
         bossCam.transform.position = new Vector3(boss.transform.position.x+ boss.transform.forward.x * 15
                                                 , 10
@@ -242,6 +261,7 @@ public class MonsterSpawner : MonoBehaviour
         playerCam.SetActive(false);
         yield return new WaitForSecondsRealtime(3f);
         playerCam.SetActive(true);
+        bossNameUI.SetActive(false);
         yield return new WaitForSecondsRealtime(2f);
         Time.timeScale = 1f;
         brain.m_IgnoreTimeScale = false;

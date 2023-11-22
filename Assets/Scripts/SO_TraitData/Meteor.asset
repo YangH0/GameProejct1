@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: Meteor
   traitType: 0
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 9a1ba13299506d84b8474107ebee8a5d, type: 3}
   curLevel: 0
   maxLevel: 5
   damageValue: 10

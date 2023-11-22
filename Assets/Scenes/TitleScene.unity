@@ -544,9 +544,9 @@ MonoBehaviour:
   ExitButton: {fileID: 1835711552}
   cutScene: {fileID: 1847464205}
   cutSceneImage:
-  - {fileID: 21300000, guid: f25e9c0ee8659234885b16cacf389dbe, type: 3}
+  - {fileID: 21300000, guid: cadfd3ba8da0c5840b3bc96375f06fda, type: 3}
   - {fileID: 21300000, guid: b31eb23fb40da7a489f79e2470f373e0, type: 3}
-  - {fileID: 21300000, guid: 2c082835166fb774b844f92d4052f656, type: 3}
+  - {fileID: 21300000, guid: 6d298515617e7f047a6f6ee98f866c47, type: 3}
   - {fileID: 21300000, guid: 0d3ab56e05346dc4fb57e8340f8ac7b2, type: 3}
 --- !u!4 &330003716
 Transform:

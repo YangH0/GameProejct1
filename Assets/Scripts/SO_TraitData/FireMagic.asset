@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traitName: FireMagic
   traitType: 0
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 08724f7a6ff14ba41bcd5d2fc0d59506, type: 3}
   curLevel: 0
   maxLevel: 1
   damageValue: 0
