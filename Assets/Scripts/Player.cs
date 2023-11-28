@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject ElecBullet;
     [SerializeField] GameObject o_Shield;
     [SerializeField] GameObject o_ShieldImpact;
+
+
     private GameObject attackObj;
 
     private Animator anim;
@@ -49,7 +51,6 @@ public class Player : MonoBehaviour
 
 
     private bool bIsRun;
-    private bool bIsCombo = false;
     private bool bIsShield = false;
     private bool bIsShieldImpact = false;
 
@@ -269,10 +270,7 @@ public class Player : MonoBehaviour
         Debug.Log(hp);
         if(hp < 0)
         {
-            gameObject.SetActive(false);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            SceneManager.LoadScene("TitleScene");
+            uiManager.SetGameOverUI();
         }
     }
 
@@ -304,6 +302,7 @@ public class Player : MonoBehaviour
 
     public IEnumerator Shield()
     {
+        StartCoroutine(traitAttack.ShieldCoolTimeStart(shieldCoolTime));
         yield return new WaitForSeconds(shieldCoolTime);
         o_Shield.SetActive(true);
         bIsShield = true;

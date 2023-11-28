@@ -47,7 +47,7 @@ public class TitleUIManager : MonoBehaviour
 
     public void LoadInGameScene()
     {
-        SceneManager.LoadScene("inGameScene");
+        SceneManager.LoadScene("InGameScene");
     }
 
     public void GameExit()

@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
 
@@ -29,6 +29,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject crossLine;
     [SerializeField] GameObject SettingMenu;
 
+    [SerializeField] GameObject[] coolTimeUI;
+
+    [SerializeField] GameObject gameOverUI;
+    [SerializeField] TextMeshProUGUI gameOverTimerUI;
+    [SerializeField] TextMeshProUGUI timerUI;
+
     private List<TraitData> traitList = new List<TraitData>();
     private List<TraitData> traitSelectionList = new List<TraitData>();
     private List<TraitData> ownTraitList = new List<TraitData>();
@@ -36,16 +42,19 @@ public class UIManager : MonoBehaviour
     private int randomNum;
     private int traitCount = 0;
     private int magicNum = -1;
+    private int curTime = 0;
 
-    private bool bIsTrait = false;
+    public bool bIsTrait;
 
     private void Awake()
     {
+        bIsTrait = false;
         for (int i = 0; i < traitData.Length; i++)
         {
             traitData[i].curLevel = 0;
         }
         Time.timeScale = 1;
+        StartCoroutine(StartTimer());
     }
 
     void Update()
@@ -149,6 +158,11 @@ public class UIManager : MonoBehaviour
             {
                 ownTraitList.Add(traitSelectionList[num]);
                 traitCount++;
+                if (traitSelectionList[num].name != "IceField" && traitSelectionList[num].name != "FireField" && traitSelectionList[num].name != "ElectricField")
+                {
+                    traitUpdate.coolTimeImage[traitUpdate.traitCount-1].sprite = traitSelectionList[num].Image;
+                    coolTimeUI[traitUpdate.traitCount - 1].SetActive(true);
+                }
             }
         }
         
@@ -178,6 +192,22 @@ public class UIManager : MonoBehaviour
     public void LoadTitleScene()
     {
         SceneManager.LoadScene("TitleScene");
+    }
+    public void LoadGameScene()
+    {
+        SceneManager.LoadScene("inGameScene");
+    }
+
+    public void SetGameOverUI()
+    {
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        int minutes = Mathf.FloorToInt(curTime / 60);
+        int seconds = Mathf.FloorToInt(curTime % 60);
+        gameOverTimerUI.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        bIsTrait = true;
+        gameOverUI.SetActive(true);
     }
 
     public void SetSettingMenu(bool state)
@@ -241,6 +271,16 @@ public class UIManager : MonoBehaviour
     public void SetExpUI(float exp)
     {
         expSlider.value = exp;
+    }
+
+    private IEnumerator StartTimer()
+    {
+        int minutes = Mathf.FloorToInt(curTime / 60);
+        int seconds = Mathf.FloorToInt(curTime % 60);
+        timerUI.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        yield return new WaitForSeconds(1f);
+        curTime++;
+        StartCoroutine(StartTimer());
     }
 
 }

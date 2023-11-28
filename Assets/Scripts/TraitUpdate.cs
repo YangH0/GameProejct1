@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class TraitUpdate : MonoBehaviour
 {
@@ -9,6 +11,10 @@ public class TraitUpdate : MonoBehaviour
 
     [SerializeField]
     TraitAttack traitAttack;
+
+    [SerializeField] public Image[] coolTimeImage;
+
+    public int traitCount = 0;
 
     private string traitName;
     private int curLevel;
@@ -34,7 +40,6 @@ public class TraitUpdate : MonoBehaviour
         rangeValue = traitData.rangeValue;
         pierce = traitData.pierce;
     }
-
 
     public void UpdateTraitValue()
     {
@@ -66,7 +71,10 @@ public class TraitUpdate : MonoBehaviour
 
             case "IceBomb":
                 if (curLevel == 0)
+                {
                     traitAttack.StartCoroutine(traitAttack.IceBomb());
+                    traitAttack.SetCoolTimeUI(0,traitCount++);
+                }
                 else
                 {
                     UpdateValue(0);
@@ -74,7 +82,10 @@ public class TraitUpdate : MonoBehaviour
                 break;
             case "IceSpear":
                 if (curLevel == 0)
+                {
                     traitAttack.StartCoroutine(traitAttack.IceSpear());
+                    traitAttack.SetCoolTimeUI(1, traitCount++);
+                }
                 else
                 {
                     UpdateValue(1);
@@ -82,7 +93,9 @@ public class TraitUpdate : MonoBehaviour
                 break;
             case "IceField":
                 if (curLevel == 0)
+                {
                     traitAttack.StartCoroutine(traitAttack.IceField());
+                }
                 else
                 {
                     UpdateValue(2);
@@ -90,7 +103,10 @@ public class TraitUpdate : MonoBehaviour
                 break;
             case "FireWall":
                 if (curLevel == 0)
+                {
                     traitAttack.StartCoroutine(traitAttack.FireWall());
+                    traitAttack.SetCoolTimeUI(3, traitCount++);
+                }
                 else
                 {
                     UpdateValue(3);
@@ -98,7 +114,10 @@ public class TraitUpdate : MonoBehaviour
                 break;
             case "Meteor":
                 if (curLevel == 0)
+                {
                     traitAttack.StartCoroutine(traitAttack.Meteor());
+                    traitAttack.SetCoolTimeUI(4, traitCount++);
+                }
                 else
                 {
                     UpdateValue(4);
@@ -106,7 +125,9 @@ public class TraitUpdate : MonoBehaviour
                 break;
             case "FireField":
                 if (curLevel == 0)
+                {
                     traitAttack.StartCoroutine(traitAttack.FireField());
+                }
                 else
                 {
                     UpdateValue(5);
@@ -115,7 +136,10 @@ public class TraitUpdate : MonoBehaviour
                 break;
             case "Wisp":
                 if (curLevel == 0)
+                {
                     traitAttack.StartCoroutine(traitAttack.Wisp());
+                    traitAttack.SetCoolTimeUI(6, traitCount++);
+                }
                 else
                 {
                     UpdateValue(6);
@@ -125,7 +149,10 @@ public class TraitUpdate : MonoBehaviour
                 break;
             case "Shield":
                 if (curLevel == 0)
+                {
                     player.StartCoroutine(player.Shield());
+                    traitAttack.SetCoolTimeUI(7, traitCount++);
+                }
                 else
                 {
                     iNum = (int)(player.shieldCoolTime * 10);
@@ -136,7 +163,10 @@ public class TraitUpdate : MonoBehaviour
                 break;
             case "Tornado":
                 if (curLevel == 0)
+                {
                     traitAttack.StartCoroutine(traitAttack.Tornado());
+                    traitAttack.SetCoolTimeUI(8, traitCount++);
+                }
                 else
                 {
                     UpdateValue(8);
@@ -145,7 +175,9 @@ public class TraitUpdate : MonoBehaviour
                 break;
             case "ElectricField":
                 if (curLevel == 0)
+                {
                     traitAttack.StartCoroutine(traitAttack.ElectricField());
+                }
                 else
                 {
                     UpdateValue(9);
@@ -154,7 +186,10 @@ public class TraitUpdate : MonoBehaviour
                 break;
             case "Thunder":
                 if (curLevel == 0)
+                {
                     traitAttack.StartCoroutine(traitAttack.Thunder());
+                    traitAttack.SetCoolTimeUI(10, traitCount++);
+                }
                 else
                 {
                     UpdateValue(10);
@@ -163,7 +198,10 @@ public class TraitUpdate : MonoBehaviour
                 break;
             case "ThunderSpear":
                 if (curLevel == 0)
+                {
                     traitAttack.StartCoroutine(traitAttack.ThunderSpear());
+                    traitAttack.SetCoolTimeUI(11, traitCount++);
+                }
                 else
                 {
                     UpdateValue(11);

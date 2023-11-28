@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public struct TraitStruct
 {
@@ -10,6 +12,7 @@ public struct TraitStruct
     public int num;
     public int pierce;
     public List<GameObject> traitList;
+    public int uiNum;
 }
 
 public class TraitAttack : MonoBehaviour
@@ -42,6 +45,8 @@ public class TraitAttack : MonoBehaviour
     [SerializeField] private float[] default_Range;
     [SerializeField] private int[] default_Num;
     [SerializeField] private int[] default_Pierce;
+
+    public TextMeshProUGUI[] coolTimeUI;
 
     public List<GameObject> monsters = new List<GameObject>();
 
@@ -95,7 +100,9 @@ public class TraitAttack : MonoBehaviour
             bul.damage = traitInfo[0].damage;
             bul.range = traitInfo[0].range;
             bul.UpdateScale();
+
         }
+        StartCoroutine(CoolTimeStart(0));
         yield return new WaitForSeconds(traitInfo[0].coolTime);
         StartCoroutine(IceBomb());
     }
@@ -128,6 +135,7 @@ public class TraitAttack : MonoBehaviour
             bul.damage = traitInfo[1].damage;
             bul.pierce = traitInfo[1].pierce;
         }
+        StartCoroutine(CoolTimeStart(1));
         yield return new WaitForSeconds(traitInfo[1].coolTime);
         StartCoroutine(IceSpear());
     }
@@ -159,6 +167,7 @@ public class TraitAttack : MonoBehaviour
             RangeTrait bul = newObj.GetComponent<RangeTrait>();
             bul.damage = traitInfo[2].damage;
         }
+        StartCoroutine(CoolTimeStart(2));
         yield return new WaitForSeconds(traitInfo[2].coolTime);
         StartCoroutine(IceField());
     }
@@ -195,6 +204,7 @@ public class TraitAttack : MonoBehaviour
             bul.range = traitInfo[3].range;
             bul.UpdateScale();
         }
+        StartCoroutine(CoolTimeStart(3));
         yield return new WaitForSeconds(traitInfo[3].coolTime);
         StartCoroutine(FireWall());
     }
@@ -231,6 +241,7 @@ public class TraitAttack : MonoBehaviour
             }
 
         }
+        StartCoroutine(CoolTimeStart(4));
         yield return new WaitForSeconds(traitInfo[4].coolTime);
         StartCoroutine(Meteor());
     }
@@ -284,9 +295,9 @@ public class TraitAttack : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
         }
-        
-            yield return new WaitForSeconds(traitInfo[6].coolTime);
-            StartCoroutine(Wisp());
+        StartCoroutine(CoolTimeStart(6));
+        yield return new WaitForSeconds(traitInfo[6].coolTime);
+        StartCoroutine(Wisp());
     }
     public IEnumerator Tornado() // È¸¿À¸®
     {
@@ -319,6 +330,7 @@ public class TraitAttack : MonoBehaviour
             bul.range = traitInfo[8].range;
             bul.UpdateScale();
         }
+        StartCoroutine(CoolTimeStart(8));
         yield return new WaitForSeconds(traitInfo[8].coolTime);
         StartCoroutine(Tornado());
     }
@@ -368,7 +380,7 @@ public class TraitAttack : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
             }
         }
-        
+        StartCoroutine(CoolTimeStart(10));
         yield return new WaitForSeconds(traitInfo[10].coolTime);
         StartCoroutine(Thunder());
     }
@@ -401,8 +413,39 @@ public class TraitAttack : MonoBehaviour
             bul.damage = traitInfo[11].damage;
             bul.range = traitInfo[11].range;
         }
+        StartCoroutine(CoolTimeStart(11));
         yield return new WaitForSeconds(traitInfo[11].coolTime);
         StartCoroutine(ThunderSpear());
+    }
+
+    private IEnumerator CoolTimeStart(int num)
+    {
+        float remainingTime = traitInfo[num].coolTime;
+        while (remainingTime > 0.5)
+        {
+            remainingTime -= Time.deltaTime;
+            coolTimeUI[traitInfo[num].uiNum].text = Mathf.FloorToInt(remainingTime).ToString();
+            yield return null;
+        }
+
+        yield break;
+    }
+    public IEnumerator ShieldCoolTimeStart(float time)
+    {
+        float remainingTime = time;
+        while (remainingTime > 0.5)
+        {
+            remainingTime -= Time.deltaTime;
+            coolTimeUI[traitInfo[7].uiNum].text = Mathf.FloorToInt(remainingTime).ToString();
+            yield return null;
+        }
+
+        yield break;
+    }
+
+    public void SetCoolTimeUI(int p_traitNum, int p_count)
+    {
+        traitInfo[p_traitNum].uiNum = p_count;
     }
 
     private void FindNearlest()
