@@ -197,7 +197,7 @@ public class TraitUpdate : MonoBehaviour
                 }
                 break;
             case "ThunderSpear":
-                if (curLevel == 0)
+                if (curLevel == 0) 
                 {
                     traitAttack.StartCoroutine(traitAttack.ThunderSpear());
                     traitAttack.SetCoolTimeUI(11, traitCount++);

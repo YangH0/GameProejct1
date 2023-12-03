@@ -55,6 +55,11 @@ public class UIManager : MonoBehaviour
         }
         Time.timeScale = 1;
         StartCoroutine(StartTimer());
+        mouseSlider.value = PlayerPrefs.GetFloat("MouseSensitivity");
+        FOVSlider.value = PlayerPrefs.GetFloat("FOV");
+        freelook.m_XAxis.m_MaxSpeed = mouseSlider.value * 150;
+        freelook.m_YAxis.m_MaxSpeed = mouseSlider.value * 2;
+        freelook.m_Lens.FieldOfView = FOVSlider.value + 30;
     }
 
     void Update()
@@ -184,10 +189,12 @@ public class UIManager : MonoBehaviour
     {
         freelook.m_XAxis.m_MaxSpeed = mouseSlider.value*150;
         freelook.m_YAxis.m_MaxSpeed = mouseSlider.value*2;
+        PlayerPrefs.SetFloat("MouseSensitivity", mouseSlider.value);
     }
     public void SetFOV()
     {
         freelook.m_Lens.FieldOfView= FOVSlider.value+30;
+        PlayerPrefs.SetFloat("FOV", FOVSlider.value);
     }
     public void LoadTitleScene()
     {
