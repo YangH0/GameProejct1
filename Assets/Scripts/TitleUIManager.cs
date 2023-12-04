@@ -21,6 +21,9 @@ public class TitleUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI traitInfoName;
     [SerializeField] TextMeshProUGUI traitInfoExp;
 
+    [SerializeField] GameObject scoreBoard;
+
+    [SerializeField] TextMeshProUGUI[] scoreText;
 
 
     private int curCurSceneNum = 0;
@@ -83,6 +86,7 @@ public class TitleUIManager : MonoBehaviour
         else
         {
             SettingButton.SetActive(true);
+            scoreBoard.SetActive(false);
         }
     }
 
@@ -106,49 +110,55 @@ public class TitleUIManager : MonoBehaviour
             case "ExpUp":
                 SetTraitInfo(4, k_name, explain);
                 break;
-
             case "IceBomb":
+                SetTraitInfo(5, k_name, explain);
                 break;
             case "IceSpear":
+                SetTraitInfo(6, k_name, explain);
                 break;
             case "IceField":
-               
+                SetTraitInfo(7, k_name, explain);
                 break;
             case "FireWall":
-               
+                SetTraitInfo(8, k_name, explain);
                 break;
             case "Meteor":
-               
+                SetTraitInfo(9, k_name, explain);
                 break;
             case "FireField":
-               
+                SetTraitInfo(10, k_name, explain);
                 break;
             case "Wisp":
-                
+                SetTraitInfo(11, k_name, explain);
                 break;
             case "Shield":
-                
+                SetTraitInfo(12, k_name, explain);
                 break;
             case "Tornado":
+                SetTraitInfo(13, k_name, explain);
                 break;
             case "ElectricField":
-                
+                SetTraitInfo(14, k_name, explain);
                 break;
             case "Thunder":
-                
+                SetTraitInfo(15, k_name, explain);
                 break;
             case "ThunderSpear":
-                
+                SetTraitInfo(16, k_name, explain);
                 break;
 
 
-            case "IceMagic": 
+            case "IceMagic":
+                SetTraitInfo(17, k_name, explain);
                 break;
-            case "FireMagic": 
+            case "FireMagic":
+                SetTraitInfo(18, k_name, explain);
                 break;
-            case "WindMagic": 
+            case "WindMagic":
+                SetTraitInfo(19, k_name, explain);
                 break;
-            case "ElecMagic": 
+            case "ElecMagic":
+                SetTraitInfo(20, k_name, explain);
                 break;
 
         }
@@ -163,6 +173,30 @@ public class TitleUIManager : MonoBehaviour
     public void OffTraitInfo()
     {
         traitInfoUI.SetActive(false);
+    }
+
+    public void SetScoreBoard()
+    {
+        if (scoreBoard.activeSelf)
+        {
+            scoreBoard.SetActive(false);
+        }
+        else
+        {
+            scoreBoard.SetActive(true);
+            SettingButton.SetActive(false);
+            for(int i = 0; i < 6; i++)
+            {
+                if (PlayerPrefs.HasKey("Score" + i.ToString()))
+                {
+                    int curTime = PlayerPrefs.GetInt("Score" + i.ToString());
+                    int minutes = Mathf.FloorToInt(curTime / 60);
+                    int seconds = Mathf.FloorToInt(curTime % 60);
+                    scoreText[i].text = string.Format("{0:00}:{1:00}", minutes, seconds);
+                }
+            }
+        }
+        
     }
 
     public void GameExit()

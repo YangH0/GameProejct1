@@ -215,6 +215,21 @@ public class UIManager : MonoBehaviour
         gameOverTimerUI.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         bIsTrait = true;
         gameOverUI.SetActive(true);
+
+        if(PlayerPrefs.GetInt("Score0") < curTime || !PlayerPrefs.HasKey("Score0"))
+        {
+            PlayerPrefs.SetInt("Score0", curTime);
+        }
+        else
+        {
+            
+            for (int i = 5; i > 1; i--)
+            {
+                if (PlayerPrefs.HasKey("Score" + (i - 1).ToString()))
+                    PlayerPrefs.SetInt("Score" + i.ToString(), PlayerPrefs.GetInt("Score" + (i - 1).ToString()));
+            }
+            PlayerPrefs.SetInt("Score1", curTime);
+        }
     }
 
     public void SetSettingMenu(bool state)

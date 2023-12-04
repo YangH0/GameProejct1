@@ -371,13 +371,13 @@ public class TraitUpdate : MonoBehaviour
                 break;
 
 
-            case "FireMagic": // 불 기본공격
-                explanation += "기본공격이 폭발하는 파이어볼로 변합니다";
-                UIName = "불 마법사";
-                break;
             case "IceMagic": // 얼음 기본공격
                 explanation += "기본공격이 가까운 적들을 베는 얼음 검으로 변합니다";
                 UIName = "얼음 마법사";
+                break;
+            case "FireMagic": // 불 기본공격
+                explanation += "기본공격이 폭발하는 파이어볼로 변합니다";
+                UIName = "불 마법사";
                 break;
             case "WindMagic": // 바람 기본공격
                 explanation += "기본 공격이 적을 관통하는 바람 칼날로 변합니다";
