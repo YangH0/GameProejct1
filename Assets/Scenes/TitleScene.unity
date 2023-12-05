@@ -1179,10 +1179,10 @@ MonoBehaviour:
   SettingButton: {fileID: 750077999}
   cutScene: {fileID: 1847464205}
   cutSceneImage:
-  - {fileID: 21300000, guid: cadfd3ba8da0c5840b3bc96375f06fda, type: 3}
-  - {fileID: 21300000, guid: b31eb23fb40da7a489f79e2470f373e0, type: 3}
-  - {fileID: 21300000, guid: 6d298515617e7f047a6f6ee98f866c47, type: 3}
-  - {fileID: 21300000, guid: 0d3ab56e05346dc4fb57e8340f8ac7b2, type: 3}
+  - {fileID: 21300000, guid: ffe71d13161045a4e944ca984d58395d, type: 3}
+  - {fileID: 21300000, guid: d9bca874c708d4840801492f13c8be97, type: 3}
+  - {fileID: 21300000, guid: 30fe0002eb5cbd744ad4e935d24b45cb, type: 3}
+  - {fileID: 21300000, guid: eeba002910371f943895a775ccd90bc5, type: 3}
   mouseSlider: {fileID: 1378990835}
   FOVSlider: {fileID: 1578911819}
   traitData:
