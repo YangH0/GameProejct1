@@ -34,6 +34,9 @@ public class Monster : MonoBehaviour
     private Vector3 dummyPosition;
     private Vector3 dummyRotation;
 
+    public SkinnedMeshRenderer meshRenderer;
+    private Color originColor;
+
 
     //디버프 수치
 
@@ -46,6 +49,8 @@ public class Monster : MonoBehaviour
         player = FindObjectOfType<Player>();
         traitAttack = FindObjectOfType<TraitAttack>();
         spawner = FindObjectOfType<MonsterSpawner>();
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        originColor = meshRenderer.material.color;
 
         dummyPosition = boneDummy.transform.localPosition;
         dummyRotation = boneDummy.transform.rotation.eulerAngles;
@@ -67,6 +72,7 @@ public class Monster : MonoBehaviour
     public void GetDamage(float damage, int debuffType = 2)
     {
         hp -= damage * getDamageMulti;
+        StartHitEffect();
         //Debug.Log(gameObject.name + " Hit!!  " + "HP:" + hp);
         Debuff(debuffType);
         if (hp <= 0)
@@ -184,6 +190,19 @@ public class Monster : MonoBehaviour
         agent.speed *= 0;
         yield return new WaitForSeconds(0.5f);
         agent.speed = speed;
+    }
+
+    private void StartHitEffect()
+    {
+        StopCoroutine(HitColor());
+        StartCoroutine(HitColor());
+    }
+
+    private IEnumerator HitColor()
+    {
+        meshRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        meshRenderer.material.color = originColor;
     }
 
 }

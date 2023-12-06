@@ -168,20 +168,19 @@ public class MonsterSpawner : MonoBehaviour
                 ResetSpawn();
                 ChangeMonsterSpawn(0);
                 break;
-            case 20:
+            case 40:
                 ResetSpawn();
                 ChangeMonsterSpawn(3);
                 break;
-            case 40:
+            case 80:
                 ResetSpawn();
                 ChangeMonsterSpawn(5);
                 break;
-            case 60:
+            case 120:
                 ResetSpawn();
                 ChangeMonsterSpawn(7);
                 break;
             case 100:
-                SpawnBoss(1);
                 break;
         }
         yield return new WaitForSeconds(1f);

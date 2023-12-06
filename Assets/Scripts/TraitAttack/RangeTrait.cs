@@ -21,6 +21,10 @@ public class RangeTrait : MonoBehaviour
         StartCoroutine(SetFalse());
         Debug.Log((defaultRange * (range * 0.01f + 1)));
         gameObject.transform.localScale = (defaultRange * (range * 0.01f + 1));
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource.clip != null)
+            audioSource.Play();
     }
 
     public void UpdateScale()

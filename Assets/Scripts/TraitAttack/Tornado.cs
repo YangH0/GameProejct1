@@ -15,6 +15,13 @@ public class Tornado : MonoBehaviour
         defaultRange = transform.localScale;
     }
 
+    private void OnEnable()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource.clip != null)
+            audioSource.Play();
+    }
+
     void FixedUpdate()
     {
         transform.Translate(Vector3.forward * speed);

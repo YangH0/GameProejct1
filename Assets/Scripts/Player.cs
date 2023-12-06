@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject o_Shield;
     [SerializeField] GameObject o_ShieldImpact;
 
+    [SerializeField] AudioSource levelUpSound;
+    [SerializeField] AudioSource attackSound;
 
     private GameObject attackObj;
 
@@ -54,9 +56,14 @@ public class Player : MonoBehaviour
     private bool bIsShield = false;
     private bool bIsShieldImpact = false;
 
+    public SkinnedMeshRenderer meshRenderer;
+    private Color originColor;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        originColor = meshRenderer.material.color;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         hp = maxHp;
@@ -86,7 +93,7 @@ public class Player : MonoBehaviour
         {
             GameObject newObj = null;
             SetAttackAnim();
-
+            attackSound.Play();
             for (int i = 0; i < bulletList.Count; i++)
             {
                 if (!bulletList[i].activeSelf)
@@ -265,6 +272,7 @@ public class Player : MonoBehaviour
             StartCoroutine(ShieldImpact());
             return;
         }
+        StartHitEffect();
         hp -= dmg;
         uiManager.SetHpUI(hp);
         Debug.Log(hp);
@@ -283,6 +291,7 @@ public class Player : MonoBehaviour
             exp -= maxExp;
             maxExp *= ExpLevelUp;
             uiManager.SetMaxExpUI(maxExp);
+            levelUpSound.Play();
             uiManager.LevelUp();
         }
         uiManager.SetExpUI(exp);
@@ -319,5 +328,18 @@ public class Player : MonoBehaviour
         bIsShieldImpact = false;
         o_ShieldImpact.SetActive(false);
         StartCoroutine(Shield());
+    }
+
+    private void StartHitEffect()
+    {
+        StopCoroutine(HitColor());
+        StartCoroutine(HitColor());
+    }
+
+    private IEnumerator HitColor()
+    {
+        meshRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        meshRenderer.material.color = originColor;
     }
 }

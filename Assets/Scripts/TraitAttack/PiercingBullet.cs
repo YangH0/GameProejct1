@@ -18,6 +18,9 @@ public class PiercingBullet : MonoBehaviour
     private void OnEnable()
     {
         count = 0;
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource.clip != null)
+            audioSource.Play();
     }
 
     private void OnTriggerEnter(Collider other)

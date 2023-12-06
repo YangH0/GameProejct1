@@ -504,10 +504,11 @@ MonoBehaviour:
   spawner: {fileID: 0}
   boneDummy: {fileID: 6244514240335436977}
   speed: 0.001
-  maxHp: 50
+  maxHp: 500
   damage: 20
   maxAttackTime: 1
   exp: 10
+  meshRenderer: {fileID: 0}
   pattern1_HitRange: {fileID: 0}
   pattern1_Stone: {fileID: 1127870524031175605, guid: 716d8724ba88e0940a96103ba847be15, type: 3}
   pattern1_pos: {fileID: 1481311918229524030}

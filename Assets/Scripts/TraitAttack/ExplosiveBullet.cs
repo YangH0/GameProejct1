@@ -28,7 +28,11 @@ public class ExplosiveBullet : MonoBehaviour
         bullet.SetActive(true);
         explosive.gameObject.SetActive(false);
         bIsHit = false;
-        
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource.clip != null)
+            audioSource.Play();
+
     }
 
     public void UpdateScale()

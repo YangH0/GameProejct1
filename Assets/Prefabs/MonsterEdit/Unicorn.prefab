@@ -19489,10 +19489,11 @@ MonoBehaviour:
   spawner: {fileID: 0}
   boneDummy: {fileID: 1851174136118165076}
   speed: 3
-  maxHp: 3000
+  maxHp: 500
   damage: 5
   maxAttackTime: 0.2
   exp: 3000
+  meshRenderer: {fileID: 0}
   pattern1_HitRange: {fileID: 6817442020481173381}
   pattern1_Laser: {fileID: 5175086051477490949}
   pattern2_HitRange: {fileID: 9197787493596488209}

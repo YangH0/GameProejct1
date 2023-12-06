@@ -390,10 +390,11 @@ MonoBehaviour:
   spawner: {fileID: 0}
   boneDummy: {fileID: 7418228353919184776}
   speed: 2
-  maxHp: 100
-  damage: 10
+  maxHp: 5
+  damage: 500
   maxAttackTime: 0.5
   exp: 10
+  meshRenderer: {fileID: 0}
   pattern1_HitRange: {fileID: 0}
   pattern1_Stone: {fileID: 9150642433849502251, guid: 37be53666185a76499d926ef4cb87f88, type: 3}
   pattern1_pos: {fileID: 1862765996333816045}

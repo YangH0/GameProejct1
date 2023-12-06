@@ -46,6 +46,7 @@ public class TraitAttack : MonoBehaviour
     [SerializeField] private int[] default_Num;
     [SerializeField] private int[] default_Pierce;
 
+
     public TextMeshProUGUI[] coolTimeUI;
 
     public List<GameObject> monsters = new List<GameObject>();

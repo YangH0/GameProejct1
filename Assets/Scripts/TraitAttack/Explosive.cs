@@ -6,6 +6,14 @@ public class Explosive : MonoBehaviour
 {
     public int debuffType;
     public float damage = 5;
+
+    private void OnEnable()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource.clip != null)
+            audioSource.Play();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Monster")

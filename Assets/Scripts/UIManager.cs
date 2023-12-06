@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
+using UnityEngine.Audio;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] explanation;
     [SerializeField] Slider mouseSlider;
     [SerializeField] Slider FOVSlider;
+    [SerializeField] Slider MVolumeSlider;
+    [SerializeField] Slider BGMSlider;
+    [SerializeField] Slider SFXSlider;
     [SerializeField] Slider hpSlider;
     [SerializeField] Slider expSlider;
 
@@ -39,6 +43,8 @@ public class UIManager : MonoBehaviour
     private List<TraitData> traitSelectionList = new List<TraitData>();
     private List<TraitData> ownTraitList = new List<TraitData>();
 
+    public AudioMixer masterMixer;
+
     private int randomNum;
     private int traitCount = 0;
     private int magicNum = -1;
@@ -55,11 +61,22 @@ public class UIManager : MonoBehaviour
         }
         Time.timeScale = 1;
         StartCoroutine(StartTimer());
+        
+    }
+
+    private void Start()
+    {
         mouseSlider.value = PlayerPrefs.GetFloat("MouseSensitivity");
         FOVSlider.value = PlayerPrefs.GetFloat("FOV");
+        MVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume");
+        BGMSlider.value = PlayerPrefs.GetFloat("BGMVolume");
+        SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume");
         freelook.m_XAxis.m_MaxSpeed = mouseSlider.value * 150;
         freelook.m_YAxis.m_MaxSpeed = mouseSlider.value * 2;
         freelook.m_Lens.FieldOfView = FOVSlider.value + 30;
+        masterMixer.SetFloat("MasterVolume", MVolumeSlider.value);
+        masterMixer.SetFloat("BGMVolume", BGMSlider.value);
+        masterMixer.SetFloat("SFXVolume", SFXSlider.value);
     }
 
     void Update()
@@ -196,6 +213,25 @@ public class UIManager : MonoBehaviour
         freelook.m_Lens.FieldOfView= FOVSlider.value+30;
         PlayerPrefs.SetFloat("FOV", FOVSlider.value);
     }
+
+    public void SetMasterVolume()
+    {
+        masterMixer.SetFloat("MasterVolume", MVolumeSlider.value);
+        PlayerPrefs.SetFloat("MasterVolume", MVolumeSlider.value);
+    }
+
+    public void SetBGMVolume()
+    {
+        masterMixer.SetFloat("BGMVolume", BGMSlider.value);
+        PlayerPrefs.SetFloat("BGMVolume", BGMSlider.value);
+    }
+
+    public void SetSFXVolume()
+    {
+        masterMixer.SetFloat("SFXVolume", SFXSlider.value);
+        PlayerPrefs.SetFloat("SFXVolume", SFXSlider.value);
+    }
+
     public void LoadTitleScene()
     {
         SceneManager.LoadScene("TitleScene");

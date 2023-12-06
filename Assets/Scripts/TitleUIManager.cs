@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Audio;
 
 public class TitleUIManager : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class TitleUIManager : MonoBehaviour
     public Sprite[] cutSceneImage;
     [SerializeField] Slider mouseSlider;
     [SerializeField] Slider FOVSlider;
+    [SerializeField] Slider MVolumeSlider;
+    [SerializeField] Slider BGMSlider;
+    [SerializeField] Slider SFXSlider;
+
+    public AudioMixer masterMixer;
 
     [SerializeField] TraitData[] traitData;
     [SerializeField] GameObject traitInfoUI;
@@ -38,13 +44,28 @@ public class TitleUIManager : MonoBehaviour
         curCurSceneNum = 0;
         cutScene.sprite = cutSceneImage[curCurSceneNum];
 
+        
+    }
+
+    private void Start()
+    {
         mouseSlider.value = PlayerPrefs.GetFloat("MouseSensitivity");
         FOVSlider.value = PlayerPrefs.GetFloat("FOV");
+        MVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume");
+        BGMSlider.value = PlayerPrefs.GetFloat("BGMVolume");
+        SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+        masterMixer.SetFloat("MasterVolume", MVolumeSlider.value);
+        masterMixer.SetFloat("BGMVolume", BGMSlider.value);
+        masterMixer.SetFloat("SFXVolume", SFXSlider.value);
     }
 
     private void Update()
     {
         SetCutScene();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetSettingMenu();
+        }
     }
 
     private void SetCutScene()
@@ -70,6 +91,24 @@ public class TitleUIManager : MonoBehaviour
     public void SetFOV()
     {
         PlayerPrefs.SetFloat("FOV", FOVSlider.value);
+    }
+
+    public void SetMasterVolume()
+    {
+        masterMixer.SetFloat("MasterVolume", MVolumeSlider.value);
+        PlayerPrefs.SetFloat("MasterVolume", MVolumeSlider.value);
+    }
+
+    public void SetBGMVolume()
+    {
+        masterMixer.SetFloat("BGMVolume", BGMSlider.value);
+        PlayerPrefs.SetFloat("BGMVolume", BGMSlider.value);
+    }
+
+    public void SetSFXVolume()
+    {
+        masterMixer.SetFloat("SFXVolume", SFXSlider.value);
+        PlayerPrefs.SetFloat("SFXVolume", SFXSlider.value);
     }
 
     public void LoadInGameScene()
