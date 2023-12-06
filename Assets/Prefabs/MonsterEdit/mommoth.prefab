@@ -390,8 +390,8 @@ MonoBehaviour:
   spawner: {fileID: 0}
   boneDummy: {fileID: 7418228353919184776}
   speed: 2
-  maxHp: 5
-  damage: 500
+  maxHp: 2000
+  damage: 50
   maxAttackTime: 0.5
   exp: 10
   meshRenderer: {fileID: 0}

@@ -19489,7 +19489,7 @@ MonoBehaviour:
   spawner: {fileID: 0}
   boneDummy: {fileID: 1851174136118165076}
   speed: 3
-  maxHp: 500
+  maxHp: 1000
   damage: 5
   maxAttackTime: 0.2
   exp: 3000
